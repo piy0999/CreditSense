@@ -1,0 +1,6 @@
+{
+  "name": "CreditSenseFinal",
+  "version": "1.5.0",
+  "description": "The simplest example of the STRATO decentralized application running on top of the simple storage contract with value setter and getter functions",
+  "maintainer": "BlockApps info@blockapps.net"
+}
