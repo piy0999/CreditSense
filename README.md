@@ -19,7 +19,7 @@ A flow chart describing the overall application is as follows:
 4. The final step is more like an extension which works in the backdrop. Eventually, if the loan gets approved and the applicant either pays the amount or defaults, this information is fed to a reinforced machine learning model which learns that from the specific parameters and tries to understand what are specific factors which make applicants more likely to default. Thereby, the model learns from its own predictions and gets better with time as and when data is fed to it. 
 
 
-#System Technicalities
+# System Technicalities
 
 We have a deployable prototype of our solution already running. We also have a made short walkthrough video of the system which can be seen on: https://vimeo.com/253112175
 
@@ -33,7 +33,7 @@ The Machine Learning Node:  This node is the brain of the whole application as s
 
 Reinforced Learning:  This serves as an extension to the model that already resides on the machine learning node and exists to learn from the implications the real world had from the analysis it did. The deep reinforced learning allows the model to learn from the predictions it made and further analyse the features that caused the specific loan applicant to default on his loan and would look for a trend in similar loan applications. This enables banks to find similar loan applicant profiles and take counter measures accordingly to make a much safer investment.  
 
-#Why are we Different?
+# Why are we Different?
 
 Secure Anonymous Data Sharing - Applicant data is shared by all the banks on a private blockchain ledger which maintains the security of the data due to a private network formation but at the same time does not contain any personal identifiers with the HKID number being hashed and stored on the block securely. Enabling faster, secure and anonymized data sharing.
 
@@ -44,7 +44,7 @@ Decentralization removes the need for third party agencies like TransUnion - As 
 No hard coded credit score formula - As we are implementing reinforced learning on our machine learning model we actually take into consideration in addition to our existing machine learning model parameters such as the employment history of the individual, the age but also when and in what time was the loan repaid and whether the applicant was able to repay or not. Through reinforced learning the calculation formula keeps getting better and this eliminates the need of a static mathematical formula. 
 
 
-#Our Target Customers
+# Our Target Customers
 
 We have three main target customers: 
 
