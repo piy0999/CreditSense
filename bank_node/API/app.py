@@ -8,11 +8,11 @@ def connect():
     with open('credentials.json') as json_data:
         credentials = json.load(json_data)
         json_data.close()
-    rpcuser = credentials.rpcuser
-    rpcpasswd = credentials.rpcpasswd
-    rpchost = credentials.rpchost
-    rpcport = credentials.rpcport
-    chainname = credentials.chainname
+    rpcuser = credentials["rpcuser"]
+    rpcpasswd = credentials["rpcpasswd"]
+    rpchost = credentials["rpchost"]
+    rpcport = credentials["rpcport"]
+    chainname = credentials["chainname"]
     print(rpcuser, rpcpasswd, rpchost, rpcport, chainname)
     return Savoir(rpcuser, rpcpasswd, rpchost, rpcport, chainname)
 
