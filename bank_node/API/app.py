@@ -1,9 +1,8 @@
 from flask import Flask
 from Savoir import Savoir
 import json
-app = Flask(__name__)
 
-multichain = connect()
+app = Flask(__name__)
 
 def connect():
     with open('credentials.json') as json_data:
@@ -14,7 +13,10 @@ def connect():
     rpchost = credentials.rpchost
     rpcport = credentials.rpcport
     chainname = credentials.chainname
+    print(rpcuser, rpcpasswd, rpchost, rpcport, chainname)
     return Savoir(rpcuser, rpcpasswd, rpchost, rpcport, chainname)
+
+multichain = connect()
 
 @app.route('/')
 def index():
@@ -32,4 +34,5 @@ def get_all_applicant_data():
         return multichain.getinfo()
 
 if __name__ == "__main__":
+    print(multichain.getinfo())
     app.run(debug=True)
