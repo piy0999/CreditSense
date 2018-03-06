@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 def connect():
     with open('credentials.json') as json_data:
-        credentials = json.loads(json_data)
+        credentials = json.load(json_data)
         json_data.close()
     rpcuser = credentials.rpcuser
     rpcpasswd = credentials.rpcpasswd
