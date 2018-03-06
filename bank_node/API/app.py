@@ -34,5 +34,4 @@ def get_all_applicant_data():
         return multichain.getinfo()
 
 if __name__ == "__main__":
-    print(multichain.getinfo())
     app.run(debug=True)
