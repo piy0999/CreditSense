@@ -1,6 +1,7 @@
 export LC_ALL="en_US.UTF-8"
 sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
 sudo dpkg-reconfigure locales
+git config credential.helper store
 git clone https://github.com/piy0999/CreditSense-Private.git
 sudo apt install python3-pip
 sudo pip3 install -r CreditSense-Private/bank_node/requirements.txt
