@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import request
+from flask import jsonify
 from Savoir import Savoir
 import json
 
@@ -26,12 +27,12 @@ def index():
 def add_loan_applicat_data():
     if request.method == 'POST':
         data = request.form
-        return multichain.getinfo()
+        return jsonify(multichain.getinfo())
 
 @app.route('/get_all_applicant_data',methods=['GET'])
 def get_all_applicant_data():
     if request.method == 'GET':
-        return multichain.getinfo()
+        return jsonify(multichain.getinfo())
 
 if __name__ == "__main__":
     app.run(debug=True)
