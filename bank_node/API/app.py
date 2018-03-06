@@ -1,4 +1,5 @@
 from flask import Flask
+from flask import request
 from Savoir import Savoir
 import json
 
@@ -13,7 +14,6 @@ def connect():
     rpchost = credentials["rpchost"]
     rpcport = credentials["rpcport"]
     chainname = credentials["chainname"]
-    print(rpcuser, rpcpasswd, rpchost, rpcport, chainname)
     return Savoir(rpcuser, rpcpasswd, rpchost, rpcport, chainname)
 
 multichain = connect()
