@@ -46,7 +46,7 @@ def get_all_applicant_data():
             obj = bytearray.fromhex(x['data']).decode()
             print(obj)
             response.append(obj)
-        return jsonify(response)
+        return jsonify(response).replace("u\'","\'")
 
 if __name__ == "__main__":
     app.run(debug=True,host='0.0.0.0', port=5000)
