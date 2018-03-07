@@ -43,7 +43,7 @@ def get_all_applicant_data():
         print(data)
         response = []
         for x in data:
-            obj = bytearray.fromhex(x['data']).decode()
+            obj = bytearray.fromhex(x['data']).decode('utf-8')
             print(obj)
             response.append(obj)
         return json.dumps(response)
