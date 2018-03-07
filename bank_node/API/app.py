@@ -40,8 +40,10 @@ def get_all_applicant_data():
     if request.method == 'GET':
         multichain.subscribe("strm1")
         data = multichain.liststreamitems("strm1")
-        print(data)
-        return jsonify(multichain.getinfo())
+        response = []
+        for x in data:
+            response.append(x['data'].decode("hex"))
+        return response
 
 if __name__ == "__main__":
     app.run(debug=True,host='0.0.0.0', port=5000)
