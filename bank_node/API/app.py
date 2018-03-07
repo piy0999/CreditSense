@@ -40,8 +40,10 @@ def get_all_applicant_data():
     if request.method == 'GET':
         multichain.subscribe("strm1")
         data = multichain.liststreamitems("strm1")
+        print(data)
         response = []
         for x in data:
+            print(bytearray.fromhex(x['data']).decode())
             response.append(bytearray.fromhex(x['data']).decode())
         return response
 
