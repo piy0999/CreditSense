@@ -27,7 +27,7 @@ def index():
 @app.route('/add_loan_applicant_data',methods=['POST'])
 def add_loan_applicat_data():
     if request.method == 'POST':
-        data = json.loads(request.body)
+        data = request.get_json()
         finaldata = json.dumps(data)
         hexval = int(finaldata, 16)
         multichain.publish(strm1, time.time(), hexval)
