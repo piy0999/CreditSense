@@ -38,7 +38,8 @@ def add_loan_applicat_data():
 @app.route('/get_all_applicant_data',methods=['GET'])
 def get_all_applicant_data():
     if request.method == 'GET':
-        data = multichain.liststreamitems("strm1",verbose=true)
+        multichain.subscribe("strm1")
+        data = multichain.liststreamitems("strm1")
         print(data)
         return jsonify(multichain.getinfo())
 
