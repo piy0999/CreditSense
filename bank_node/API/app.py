@@ -42,7 +42,7 @@ def get_all_applicant_data():
         data = multichain.liststreamitems("strm1")
         response = []
         for x in data:
-            response.append(x['data'].decode("hex"))
+            response.append(bytearray.fromhex(x['data']).decode())
         return response
 
 if __name__ == "__main__":
