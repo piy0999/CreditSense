@@ -43,10 +43,11 @@ def get_all_applicant_data():
         print(data)
         response = []
         for x in data:
-            obj = bytearray.fromhex(x['data']).decode()
+            obj = json.loads(bytearray.fromhex(x['data']).decode())
             print(obj)
             response.append(obj)
-        return jsonify(json.loads(response))
+
+        return jsonify(response)
 
 if __name__ == "__main__":
     app.run(debug=True,host='0.0.0.0', port=5000)
