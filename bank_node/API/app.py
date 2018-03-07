@@ -43,8 +43,9 @@ def get_all_applicant_data():
         print(data)
         response = []
         for x in data:
-            print(bytearray.fromhex(x['data']).decode())
-            response.append(bytearray.fromhex(x['data']).decode())
+            obj = bytearray.fromhex(x['data']).decode()
+            print(obj)
+            response.append(obj)
         return response
 
 if __name__ == "__main__":
