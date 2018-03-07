@@ -4,6 +4,7 @@ from flask import jsonify
 from Savoir import Savoir
 import json
 import time
+import datetime
 
 app = Flask(__name__)
 
@@ -30,7 +31,8 @@ def add_loan_applicat_data():
         data = request.get_json()
         finaldata = json.dumps(data)
         hexval = finaldata.encode('utf-8')
-        multichain.publish(strm1, time.time(), hexval.hex())
+        curid = datetime.datetime.now()
+        multichain.publish("strm1", str(curid), hexval.hex())
         return 'Success!'
 
 @app.route('/get_all_applicant_data',methods=['GET'])
