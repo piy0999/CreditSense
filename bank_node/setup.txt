@@ -1,5 +1,0 @@
-1. run setup.sh
-2. find rcp port from output and put in credentials.json
-3. find password from output and put in credentials.json
-4. copy credentials.json to API folder
-5. python3 app.py
