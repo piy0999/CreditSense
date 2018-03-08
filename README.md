@@ -18,6 +18,8 @@ A flow chart describing the overall application is as follows:
 
 4. The final step is more like an extension which works in the backdrop. Eventually, if the loan gets approved and the applicant either pays the amount or defaults, this information is fed to a reinforced machine learning model which learns that from the specific parameters and tries to understand what are specific factors which make applicants more likely to default. Thereby, the model learns from its own predictions and gets better with time as and when data is fed to it.
 
+<b> Try having a look at our presentation for the project under presentation folder in the repository </b> 
+
 # System Technicalities
 
 We have a deployable prototype of our solution already running. We also have a made short walkthrough video of the system which can be seen on: https://vimeo.com/253112175
