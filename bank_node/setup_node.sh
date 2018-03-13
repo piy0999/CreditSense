@@ -19,14 +19,10 @@ cd ~
 echo '6. Connecting to multichain chain...'
 multichaind chain1@$1
 multichaind chain1 -daemon
-echo '7. Opening ports...'
-sudo ufw allow 22
-sudo ufw allow 5000
-sudo ufw --force enable
-echo '8. Setting up local credentials for multichain...'
-port=`grep default-rpc-port ~/.multichain/chain1/params.dat | grep -oP '[0-9]{4}'`
-password=`grep rpcpassword  ~/.multichain/chain1/multichain.conf | cut -d'=' -f2`
-cat >~/CreditSense-Private/bank_node/API/credentials.json <<EOF
+echo '7. Setting up local credentials for multichain...'
+port=`sudo grep default-rpc-port ~/.multichain/chain1/params.dat | grep -oP '[0-9]{4}'`
+password=`sudo grep rpcpassword  ~/.multichain/chain1/multichain.conf | cut -d'=' -f2`
+cat >~/CreditSense/bank_node/API/credentials.json <<EOF
     {
       "rpcuser": "multichainrpc",
       "rpcpasswd": "$password",
@@ -35,6 +31,10 @@ cat >~/CreditSense-Private/bank_node/API/credentials.json <<EOF
       "chainname": "chain1"
     }
 EOF
+echo '8. Opening ports....'
+sudo ufw allow 22
+sudo ufw allow 5000
+sudo ufw --force enable
 echo '9. Starting flask server...'
-cd ~/CreditSense-Private/bank_node/API
+cd ~/CreditSense/bank_node/API
 python3 app.py
