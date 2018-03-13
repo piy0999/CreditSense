@@ -26,7 +26,7 @@ multichain-cli chain1 create stream strm1 true
 echo '7. Opening ports...'
 sudo ufw allow 22
 sudo ufw allow 5000
-sudo ufw enable
+sudo ufw -y enable
 echo '8. Setting up local credentials for multichain...'
 port=`grep default-rpc-port ~/.multichain/chain1/params.dat | grep -oP '[0-9]{4}'`
 password=`grep rpcpassword  ~/.multichain/chain1/multichain.conf | cut -d'=' -f2`
