@@ -6,9 +6,9 @@ git config credential.helper store
 echo '2. Cloning github...'
 git clone http://github.com/piy0999/CreditSense.git
 echo '3. Installing python3 pip...'
-sudo apt install python3-pip
+sudo apt -y install python3-pip
 echo '4. Installing packages...'
-sudo pip3 install -r ~/CreditSense-Private/bank_node/requirements.txt
+sudo pip3 install -r ~/CreditSense/bank_node/requirements.txt
 echo '5. Installing multichain...'
 cd ~/tmp
 wget https://www.multichain.com/download/multichain-1.0.4.tar.gz
@@ -30,7 +30,7 @@ sudo ufw enable
 echo '8. Setting up local credentials for multichain...'
 port=`grep default-rpc-port ~/.multichain/chain1/params.dat | grep -oP '[0-9]{4}'`
 password=`grep rpcpassword  ~/.multichain/chain1/multichain.conf | cut -d'=' -f2`
-cat >~/CreditSense-Private/bank_node/API/credentials.json <<EOF
+cat >~/CreditSense/bank_node/API/credentials.json <<EOF
     {
       "rpcuser": "multichainrpc",
       "rpcpasswd": "$password",
@@ -40,5 +40,5 @@ cat >~/CreditSense-Private/bank_node/API/credentials.json <<EOF
     }
 EOF
 echo '9. Starting flask server...'
-cd ~/CreditSense-Private/bank_node/API
+cd ~/CreditSense/bank_node/API
 python3 app.py
