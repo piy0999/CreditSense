@@ -25,7 +25,6 @@ sed -i -e 's/anyone-can-connect = false/anyone-can-connect = true/g' ~/.multicha
 #sed -i -e 's/anyone-can-send = false/anyone-can-send = true/g' ~/.multichain/chain1/params.dat
 #sed -i -e 's/anyone-can-receive = false/aanyone-can-receive = true/g' ~/.multichain/chain1/params.dat
 multichaind chain1 -daemon
-multichain-cli chain1 create stream strm1 true
 echo '7. Setting up local credentials for multichain...'
 port=`sudo grep default-rpc-port ~/.multichain/chain1/params.dat | grep -oP '[0-9]{4}'`
 networkport=`sudo grep default-network-port ~/.multichain/chain1/params.dat | grep -oP '[0-9]{4}'`
@@ -45,6 +44,7 @@ sudo ufw allow 5000
 sudo ufw allow $networkport
 sudo ufw --force enable
 nodeaddress=`multichain-cli chain1 getinfo | grep "nodeaddress" | cut -d '"' -f4`
+multichain-cli chain1 create stream strm1
 echo "Connect to $nodeaddress from other nodes"
 echo '9. Starting flask server...'
 cd ~/CreditSense/bank_node/API
