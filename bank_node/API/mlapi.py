@@ -49,10 +49,13 @@ def index():
 def get_credit_score():
 	if request.method == 'POST':
 		data = request.get_json()
+
 		applicant_data = {
 		'id':random.randint(1,10001),
 		'salary':random.randint(1,50001)
 		}
+
+        applicant_data = data
 
 		#ml model
 		time.sleep(5)
@@ -69,16 +72,6 @@ def get_credit_score():
 		send_email('A loan application has been submitted - Bank 1','User #' + str(applicant_data['id']) + ' has applied for a loan. Check credit sense portal for details and credit score.')
 
 		return jsonify(applicant_data)
-
-@app.route('/add_loan_applicant_data',methods=['POST'])
-def add_loan_applicat_data():
-    if request.method == 'POST':
-        data = request.get_json()
-        finaldata = json.dumps(data)
-        hexval = finaldata.encode('utf-8')
-        curid = datetime.datetime.now()
-        multichain.publish("strm1", str(curid), hexval.hex())
-        return 'Success!'
 
 @app.route('/get_all_applicant_data',methods=['GET'])
 def get_all_applicant_data():

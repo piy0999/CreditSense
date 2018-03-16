@@ -2,6 +2,7 @@ from flask import Flask
 from flask import request
 from flask import jsonify
 from Savoir import Savoir
+import requests
 import json
 import time
 import datetime
@@ -29,11 +30,11 @@ def index():
 def add_loan_applicat_data():
     if request.method == 'POST':
         data = request.get_json()
-        finaldata = json.dumps(data)
-        hexval = finaldata.encode('utf-8')
-        curid = datetime.datetime.now()
-        multichain.publish("strm1", str(curid), hexval.hex())
-        return 'Success!'
+        r = requests.post('http://40.65.176.117:5000/apply_loan', json=jsonify(data))
+        if (r.status_code == 200):
+            return jsonify({"status":"success"})
+        else:
+            return jsonify({"status":"failure"})
 
 @app.route('/get_all_applicant_data',methods=['GET'])
 def get_all_applicant_data():
