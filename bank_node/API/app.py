@@ -30,8 +30,7 @@ def index():
 def add_loan_applicat_data():
     if request.method == 'POST':
         data = request.get_json()
-        print(data)
-        r = requests.post('http://40.65.176.117:5000/apply_loan', json=jsonify(data))
+        r = requests.post('http://40.65.176.117:5000/apply_loan', data)
         if (r.status_code == 200):
             return jsonify({"status":"success"})
         else:

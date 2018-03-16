@@ -48,7 +48,7 @@ def index():
 @app.route('/apply_loan',methods=['POST'])
 def get_credit_score():
 	if request.method == 'POST':
-		data = json.loads(json.dumps(request.get_json()))
+		data = request.get_json()
 
 		applicant_data = {
 		'id':random.randint(1,10001),
