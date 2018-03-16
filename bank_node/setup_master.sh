@@ -17,10 +17,10 @@ cd multichain-1.0.4
 sudo mv multichaind multichain-cli multichain-util /usr/local/bin
 cd ~
 echo '6. Creating multichain chain and stream...'
-multichain-util create chain1
+multichain-util create chain1 -setup-first-blocks=1 -admin-consensus-admin=0.6
 sed -i -e 's/anyone-can-connect = false/anyone-can-connect = true/g' ~/.multichain/chain1/params.dat
-sed -i -e 's/anyone-can-send = false/anyone-can-send = true/g' ~/.multichain/chain1/params.dat
-sed -i -e 's/anyone-can-receive = false/aanyone-can-receive = true/g' ~/.multichain/chain1/params.dat
+#sed -i -e 's/anyone-can-send = false/anyone-can-send = true/g' ~/.multichain/chain1/params.dat
+#sed -i -e 's/anyone-can-receive = false/aanyone-can-receive = true/g' ~/.multichain/chain1/params.dat
 multichaind chain1 -daemon
 multichain-cli chain1 create stream strm1 true
 echo '7. Setting up local credentials for multichain...'
