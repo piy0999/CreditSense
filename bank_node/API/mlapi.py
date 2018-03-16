@@ -49,7 +49,6 @@ def index():
 def get_credit_score():
 	if request.method == 'POST':
 		data = request.get_json()
-		print(data)
 		applicant_data = {
 		'id':random.randint(1,10001),
 		'salary':random.randint(1,50001)
@@ -57,7 +56,6 @@ def get_credit_score():
 		applicant_data = data
 		if 'id' not in applicant_data:
 			applicant_data['id'] = random.randint(1,10001)
-		print(applicant_data)
 		#ml model
 		time.sleep(5)
 		credit_score = round(random.random()*(5)+5, 2)
