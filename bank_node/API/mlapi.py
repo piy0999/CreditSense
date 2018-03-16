@@ -55,7 +55,7 @@ def get_credit_score():
 		'salary':random.randint(1,50001)
 		}
 		applicant_data = data
-        print(applicant_data)
+		print(applicant_data)
 		#ml model
 		time.sleep(5)
 		credit_score = round(random.random()*(5)+5, 2)
