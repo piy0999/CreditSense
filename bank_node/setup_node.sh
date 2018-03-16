@@ -6,6 +6,7 @@ git config credential.helper store
 echo '2. Cloning github...'
 git clone http://github.com/piy0999/CreditSense.git
 echo '3. Installing python3 pip...'
+sudo apt-get update
 sudo apt -y install python3-pip
 echo '4. Installing packages...'
 sudo pip3 install -r ~/CreditSense/bank_node/requirements.txt
