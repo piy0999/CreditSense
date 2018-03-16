@@ -2,9 +2,11 @@ echo '1. Setting up ubuntu locale...'
 export LC_ALL="en_US.UTF-8"
 sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
 sudo dpkg-reconfigure locales
-git config credential.helper store
 echo '2. Cloning github...'
 git clone http://github.com/piy0999/CreditSense.git
+cd ~/CreditSense
+git config credential.helper store
+cd ~
 echo '3. Installing python3 pip...'
 sudo apt-get update
 sudo apt -y install python3-pip
@@ -42,6 +44,8 @@ sudo ufw allow 22
 sudo ufw allow 5000
 sudo ufw allow $networkport
 sudo ufw --force enable
+nodeaddress=`multichain-cli chain1 getinfo | grep "nodeaddress" | cut -d '"' -f4`
+echo "Connect to $nodeaddress from other nodes"
 echo '9. Starting flask server...'
 cd ~/CreditSense/bank_node/API
 python3 app.py
