@@ -55,8 +55,8 @@ def get_credit_score():
 		'salary':random.randint(1,50001)
 		}
 		applicant_data = data
-        if 'id' not in applicant_data:
-            applicant_data['id'] = random.randint(1,10001)
+		if 'id' not in applicant_data:
+			applicant_data['id'] = random.randint(1,10001)
 		print(applicant_data)
 		#ml model
 		time.sleep(5)
