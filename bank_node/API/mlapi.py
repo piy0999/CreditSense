@@ -49,7 +49,7 @@ def index():
 def get_credit_score():
 	if request.method == 'POST':
 		data = request.get_json()
-
+        print(data)
 		applicant_data = {
 		'id':random.randint(1,10001),
 		'salary':random.randint(1,50001)
