@@ -29,7 +29,8 @@ def index():
 @app.route('/add_loan_applicant_data',methods=['POST'])
 def add_loan_applicat_data():
     if request.method == 'POST':
-        data = json.loads(json.dumps(request.get_json()))
+        data = request.get_json()
+        print(data)
         r = requests.post('http://40.65.176.117:5000/apply_loan', json=jsonify(data))
         if (r.status_code == 200):
             return jsonify({"status":"success"})
