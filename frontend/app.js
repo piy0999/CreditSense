@@ -7,4 +7,4 @@ app.use(express.static('public'));
 app.use('/bank', express.static('bank'));
 app.use('/user', express.static('user'));
 
-app.listen(80);
+app.listen(8080);
