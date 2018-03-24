@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
-from Savoir import Savoir
 import json, time, datetime, random
+from ml_helper import calculate_score
 
 app = Flask(__name__)
 
@@ -15,7 +15,7 @@ def connect():
     chainname = credentials["chainname"]
     return Savoir(rpcuser, rpcpasswd, rpchost, rpcport, chainname)
 
-multichain = connect()
+#multichain = connect()
 
 def send_email(subject, body,user = 'bank1.creditsense@gmail.com',pwd='daaldotarun',recipient='bank1.creditsense@gmail.com'):
     import smtplib
@@ -48,17 +48,16 @@ def get_credit_score():
 	if request.method == 'POST':
 		data = request.get_json()
 		#ml model
-		time.sleep(5)
-		credit_score = round(random.random()*(5)+5, 2)
+		credit_score = calculate_score(data)
 		#ml model
-		data['score'] = credit_score
+		data['score'] = str(credit_score)
 		finaldata = json.dumps(data)
 
 		hexval = finaldata.encode('utf-8')
 		curid = datetime.datetime.now()
-		multichain.publish("strm1", str(curid), hexval.hex())
+		#multichain.publish("strm1", str(curid), hexval.hex())
 
-		send_email('A loan application has been submitted - Bank 1','User #' + str(data['id']) + ' has applied for a loan. Check credit sense portal for details and credit score.')
+		#send_email('A loan application has been submitted - Bank 1','User #' + str(data['id']) + ' has applied for a loan. Check credit sense portal for details and credit score.')
 
 		return jsonify(data)
 
