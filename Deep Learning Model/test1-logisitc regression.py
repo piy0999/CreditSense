@@ -15,6 +15,7 @@ import json
 from sklearn_pandas import DataFrameMapper
 
 import csv
+import pickle
 import matplotlib.pyplot as plt
 
 #Running a sample data set to process a loan application  one at a time
@@ -96,59 +97,10 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random
 log_lm = LogisticRegression()
 log_lm.fit(X_train, y_train)
 log_lm.score(X_test, y_test)
+   
 
-#Gradient Boosting Model
-
-grd = GradientBoostingClassifier(n_estimators=100)
-grd.fit(X_train, y_train)
-grd.score(X_test, y_test)
-
-#Decision Tree Model
-
-dtree=DecisionTreeClassifier()
-parameters = {'max_depth':[5, 10, 15, 20, 25, 32]}
-dtree_gs = GridSearchCV(dtree, parameters, cv=5)
-dtree_gs.fit(X_train, y_train)
-dtree_gs.score(X_test, y_test)
-
-#Random Tree Model
-
-rf=RandomForestClassifier()
-parameters = {'max_depth':[5, 15], 'n_estimators':[10,30]}
-rf_gs = GridSearchCV(rf, parameters)
-rf_gs.fit(X_train, y_train)
-rf_gs.score(X_test, y_test)
-
-a={ 'delinq_2yrs': df.delinq_2yrs.item(),
-'delinq_2yrs_zero': df.delinq_2yrs_zero.item(),
-'dti': df.dti.item(),
-'emp_length_num': df.emp_length_num.item(),
-'grade': df.grade.item(),
-'home_ownership': df.home_ownership.item(),
-'inq_last_6mths': df.inq_last_6mths.item(),
-'last_delinq_none': df.last_delinq_none.item(),
-'last_major_derog_none': df.last_major_derog_none.item(),
-'open_acc': df.open_acc.item(),
-'payment_inc_ratio': df.payment_inc_ratio.item(),
-'pub_rec': df.pub_rec.item(),
-'pub_rec_zero': df.pub_rec_zero.item(),
-'purpose': df.purpose.item(),
-'revol_util': df.revol_util.item(),
-'short_emp': df.short_emp.item(),
-'sub_grade_num': df.sub_grade_num.item()}
-
-XX=preProcess(a, mapper,parameter_cols)
-
-score = log_lm.predict_proba(XX)[:,1][0]
-
-score = score * 10
-score = 10 - score
-score = str(score)
-
-"""data = [{'Credit Score': score}]
-with open('data.json', 'w') as outfile:
-    json.dump(data, outfile)"""
-
+filename = 'finalized_model.sav'
+pickle.dump(log_lm, open(filename, 'wb'))
 
 #Sending out post
 #r = requests.post('https://hooks.zapier.com/hooks/catch/2888786/80e87z/', data = {'Credit Score': score})
