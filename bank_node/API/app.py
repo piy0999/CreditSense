@@ -109,7 +109,7 @@ def wrapper_get_application_by_id():
 def update_application():
     data = request.get_json()
     applicant_data = get_application_by_id(data['id'])
-    if applicant_data not None:
+    if applicant_data is not None:
         applicant_data['status'] = data['status']
         r = requests.post('http://40.65.176.117:5000/apply_loan', json=applicant_data)
         if (r.status_code == 200):
