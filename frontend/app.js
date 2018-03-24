@@ -3,7 +3,8 @@ var express = require('express'),
 
 app = express();
 
-app.set('port', 8080);
-
+app.use(express.static('public'));
 app.use('/bank', express.static('bank'));
 app.use('/user', express.static('user'));
+
+app.listen(80);
