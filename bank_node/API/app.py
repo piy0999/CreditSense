@@ -68,7 +68,7 @@ def status():
     })
 
 @app.route('/all_applications',methods=['GET'])
-def wrapper_all_applications:
+def wrapper_all_applications():
     jsonify(list(all_applications().values()))
 
 @app.route('/pending_applications',methods=['GET'])
@@ -102,7 +102,7 @@ def add_application():
         return jsonify({"status":"required params not provided"})
 
 @app.route('/get_application_by_id',methods=['GET'])
-def wrapper_get_application_by_id:
+def wrapper_get_application_by_id():
     return jsonify(get_application_by_id(given_id))
 
 @app.route('/update_application',methods=['POST'])
