@@ -17,6 +17,19 @@ from sklearn_pandas import DataFrameMapper
 import csv
 import matplotlib.pyplot as plt
 
+#Running a sample data set to process a loan application  one at a time
+
+def preProcess(a, mapper,parameter_cols):
+    data=list(a.values())
+    colz=list(a.keys())
+    dfx=pd.DataFrame(data=[data], columns=colz)
+    dfx
+
+    XX1=mapper.transform(dfx)
+    XX2=dfx[parameter_cols]
+    XX = np.hstack((XX1,XX2))
+    return XX
+
 input_file='lending-club-data.csv'
 loan_file = pd.read_csv(input_file, infer_datetime_format = True, encoding = "ISO-8859-1", error_bad_lines=False, index_col=False, low_memory=False)
 
@@ -44,7 +57,7 @@ features = ['grade',                     # grade of the loan (categorical)
             'pub_rec',                   # number of derogatory public records
             'pub_rec_zero',              # no derogatory public records
             'revol_util',                # percent of available credit being used
-           ]
+        ]
 
 response='bad_loans'
 
@@ -106,39 +119,25 @@ rf_gs = GridSearchCV(rf, parameters)
 rf_gs.fit(X_train, y_train)
 rf_gs.score(X_test, y_test)
 
-
-#Running a sample data set to process a loan application  one at a time
-
-def preProcess(a):
-    data=list(a.values())
-    colz=list(a.keys())
-    dfx=pd.DataFrame(data=[data], columns=colz)
-    dfx
-
-    XX1=mapper.transform(dfx)
-    XX2=dfx[parameter_cols]
-    XX = np.hstack((XX1,XX2))
-    return XX
-
 a={ 'delinq_2yrs': df.delinq_2yrs.item(),
- 'delinq_2yrs_zero': df.delinq_2yrs_zero.item(),
- 'dti': df.dti.item(),
- 'emp_length_num': df.emp_length_num.item(),
- 'grade': df.grade.item(),
- 'home_ownership': df.home_ownership.item(),
- 'inq_last_6mths': df.inq_last_6mths.item(),
- 'last_delinq_none': df.last_delinq_none.item(),
- 'last_major_derog_none': df.last_major_derog_none.item(),
- 'open_acc': df.open_acc.item(),
- 'payment_inc_ratio': df.payment_inc_ratio.item(),
- 'pub_rec': df.pub_rec.item(),
- 'pub_rec_zero': df.pub_rec_zero.item(),
- 'purpose': df.purpose.item(),
- 'revol_util': df.revol_util.item(),
- 'short_emp': df.short_emp.item(),
- 'sub_grade_num': df.sub_grade_num.item()}
+'delinq_2yrs_zero': df.delinq_2yrs_zero.item(),
+'dti': df.dti.item(),
+'emp_length_num': df.emp_length_num.item(),
+'grade': df.grade.item(),
+'home_ownership': df.home_ownership.item(),
+'inq_last_6mths': df.inq_last_6mths.item(),
+'last_delinq_none': df.last_delinq_none.item(),
+'last_major_derog_none': df.last_major_derog_none.item(),
+'open_acc': df.open_acc.item(),
+'payment_inc_ratio': df.payment_inc_ratio.item(),
+'pub_rec': df.pub_rec.item(),
+'pub_rec_zero': df.pub_rec_zero.item(),
+'purpose': df.purpose.item(),
+'revol_util': df.revol_util.item(),
+'short_emp': df.short_emp.item(),
+'sub_grade_num': df.sub_grade_num.item()}
 
-XX=preProcess(a)
+XX=preProcess(a, mapper,parameter_cols)
 
 score = log_lm.predict_proba(XX)[:,1][0]
 
@@ -152,4 +151,5 @@ with open('data.json', 'w') as outfile:
 
 
 #Sending out post
-r = requests.post('https://hooks.zapier.com/hooks/catch/2888786/80e87z/', data = {'Credit Score': score})
+#r = requests.post('https://hooks.zapier.com/hooks/catch/2888786/80e87z/', data = {'Credit Score': score})
+
