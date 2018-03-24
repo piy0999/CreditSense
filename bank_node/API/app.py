@@ -25,7 +25,7 @@ def hash(unhashed):
     hashed = hash_object.hexdigest()
     return hashed
 
-def all_applications():
+def all_latest_applications():
     multichain.subscribe("strm1")
     data = multichain.liststreamitems("strm1")
     applications = {}
@@ -34,7 +34,26 @@ def all_applications():
         applications[application['id']] = application
     return applications
 
-def get_application_by_id(given_id):
+def all_applications():
+    multichain.subscribe("strm1")
+    data = multichain.liststreamitems("strm1")
+    applications = {}
+    for application in data:
+        application = json.loads(bytearray.fromhex(application['data']).decode())
+        if application['id'] in applications[application['id']]:
+            applications[application['id']].append(application)
+        else:
+            applications[application['id']] = [application]
+    return applications
+
+def get_latest_application_by_id(given_id):
+    data = all_applications()
+    if hash(given_id) in data:
+        return data[hash(given_id)]
+    else:
+        return None
+
+def get_latest_application_by_id(given_id):
     data = all_applications()
     if hash(given_id) in data:
         return data[hash(given_id)]
