@@ -1,6 +1,4 @@
-from flask import Flask
-from flask import request
-from flask import jsonify
+from flask import Flask, request, jsonify
 from Savoir import Savoir
 import json, time, datetime, random
 
@@ -49,20 +47,12 @@ def index():
 def get_credit_score():
 	if request.method == 'POST':
 		data = request.get_json()
-		applicant_data = {
-		'id':random.randint(1,10001),
-		'salary':random.randint(1,50001)
-		}
-		applicant_data = data
-		if 'id' not in applicant_data:
-			applicant_data['id'] = random.randint(1,10001)
 		#ml model
 		time.sleep(5)
 		credit_score = round(random.random()*(5)+5, 2)
 		#ml model
-		applicant_data['score'] = credit_score
-
-		finaldata = json.dumps(applicant_data)
+		data['score'] = credit_score
+		finaldata = json.dumps(data)
 
 		hexval = finaldata.encode('utf-8')
 		curid = datetime.datetime.now()
@@ -71,20 +61,6 @@ def get_credit_score():
 		send_email('A loan application has been submitted - Bank 1','User #' + str(applicant_data['id']) + ' has applied for a loan. Check credit sense portal for details and credit score.')
 
 		return jsonify(applicant_data)
-
-@app.route('/get_all_applicant_data',methods=['GET'])
-def get_all_applicant_data():
-    if request.method == 'GET':
-        multichain.subscribe("strm1")
-        data = multichain.liststreamitems("strm1")
-        print(data)
-        response = []
-        for x in data:
-            obj = json.loads(bytearray.fromhex(x['data']).decode())
-            print(obj)
-            response.append(obj)
-
-        return jsonify(response)
 
 if __name__ == "__main__":
     app.run(debug=True,host='0.0.0.0', port=5000)
