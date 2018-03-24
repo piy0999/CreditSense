@@ -56,22 +56,23 @@ var obj = {
   total_rec_prncp: '5000'
 };
 
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 window.onload = function() {
   var x = document.getElementById('submit');
   x.onclick = function() {
     var xhttp = new XMLHttpRequest();
-    xhttp.open(
-      'POST',
-      'http://52.230.125.236:5000/add_loan_applicant_data',
-      true
-    );
+    xhttp.open('POST', 'http://localhost:5000/add_application', true);
     xhttp.setRequestHeader('Content-type', 'application/json');
     for (i in obj) {
       document.getElementById(i).defaultValue = obj[i];
     }
 
     var data = {};
-    for (var i = 0; i < list.length; i++) {
+    data['id'] = getRandomInt(1, 10000).toString();
+    for (var i = 1; i < list.length; i++) {
       var val = document.getElementById(list[i]).value;
       data[list[i]] = val;
     }
