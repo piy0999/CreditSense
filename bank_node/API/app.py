@@ -28,7 +28,7 @@ def all_applications():
     data = multichain.liststreamitems("strm1")
     applications = {}
     for application in data:
-        application = json.loads(bytearray.fromhex(x['data']).decode())
+        application = json.loads(bytearray.fromhex(application['data']).decode())
         applications[application['id']] = application
     return applications
 
