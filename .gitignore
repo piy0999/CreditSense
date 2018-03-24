@@ -1,6 +1,5 @@
 /bank_node/env
-/bank_node/.DS_Store
 /bank_node/API/credentials.json
 /bank_node/API/.idea/
 .DS_Store
-/images/icons/.DS_Store
+node_modules
