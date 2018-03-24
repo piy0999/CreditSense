@@ -41,9 +41,9 @@ def send_email(subject, body,user = 'bank1.creditsense@gmail.com',pwd='daaldotar
 
 @app.route('/')
 def index():
-    return 'This is the credit sense API\n'
+    return 'This is the CreditSense Credit Scorer API.\n'
 
-@app.route('/apply_loan',methods=['POST'])
+@app.route('/add_scored_application',methods=['POST'])
 def get_credit_score():
 	if request.method == 'POST':
 		data = request.get_json()
@@ -58,9 +58,9 @@ def get_credit_score():
 		curid = datetime.datetime.now()
 		multichain.publish("strm1", str(curid), hexval.hex())
 
-		send_email('A loan application has been submitted - Bank 1','User #' + str(applicant_data['id']) + ' has applied for a loan. Check credit sense portal for details and credit score.')
+		send_email('A loan application has been submitted - Bank 1','User #' + str(data['id']) + ' has applied for a loan. Check credit sense portal for details and credit score.')
 
-		return jsonify(applicant_data)
+		return jsonify(data)
 
 if __name__ == "__main__":
     app.run(debug=True,host='0.0.0.0', port=5000)

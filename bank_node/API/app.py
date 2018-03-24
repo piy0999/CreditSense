@@ -17,6 +17,8 @@ def connect():
 
 multichain = connect()
 
+#multichain.create('stream','strm1',True)
+
 def hash(unhashed):
     byte_id = unhashed.encode('utf-8')
     hash_object = hashlib.sha256(byte_id)
@@ -41,7 +43,7 @@ def get_application_by_id(given_id):
 
 @app.route('/')
 def index():
-    return 'This is the creditsense consortium.\n'
+    return 'This is the CreditSense consortium.\n'
 
 @app.route('/status',methods=['GET'])
 def status():
@@ -58,7 +60,7 @@ def status():
         elif application['status'] == 'approved':
             approved_applications += 1
         elif application['status'] == 'disapproved':
-            disapprove_applications += 1
+            disapproved_applications += 1
 
     return jsonify({
         'total_applications':total_applications,
@@ -69,7 +71,7 @@ def status():
 
 @app.route('/all_applications',methods=['GET'])
 def wrapper_all_applications():
-    jsonify(list(all_applications().values()))
+    return jsonify(list(all_applications().values()))
 
 @app.route('/pending_applications',methods=['GET'])
 def pending_applications():
@@ -82,18 +84,28 @@ def pending_applications():
 
 @app.route('/add_application',methods=['POST'])
 def add_application():
-    required_fields = ['id','loan_amnt', 'funded_amnt', 'funded_amnt_inv', 'term', 'int_rate',
+    old_required_fields = ['id','loan_amnt', 'funded_amnt', 'funded_amnt_inv', 'term', 'int_rate',
                 'installment', 'grade', 'sub_grade', 'emp_length', 'home_ownership',
                 'annual_inc', 'verification_status', 'purpose', 'dti',
                 'delinq_2yrs', 'inq_last_6mths', 'open_acc', 'revol_bal', 'revol_util',
                 'total_acc', 'initial_list_status', 'total_pymnt', 'total_pymnt_inv',
                 'total_rec_prncp', 'total_rec_int', 'last_pymnt_amnt',
                 'total_rev_hi_lim', 'loan_status_coded']
+    required_fields = ['id','loan_amnt', 'funded_amnt', 'funded_amnt_inv', 'term', 'int_rate',
+                'installment', 'grade', 'sub_grade', 'emp_length', 'home_ownership',
+                'annual_inc', 'purpose', 'dti',
+                'delinq_2yrs', 'inq_last_6mths', 'open_acc', 'revol_bal', 'revol_util',
+                'total_acc', 'initial_list_status', 'total_pymnt', 'total_pymnt_inv',
+                'total_rec_prncp', 'total_rec_int', 'last_pymnt_amnt']
     data = request.get_json()
-    if all(field in data for field in required_fields):
-        data['id'] = hash(id)
-        data['status'] = 'pending'
-        r = requests.post('http://40.65.176.117:5000/apply_loan', json=data)
+    checks = [field in data for field in required_fields]
+    if all(checks):
+        application = {}
+        for field in required_fields:
+            application[field] = data[field]
+        application['id'] = hash(data['id'])
+        application['status'] = 'pending'
+        r = requests.post('http://0.0.0.0:3000/add_scored_application', json=application)
         if (r.status_code == 200):
             return jsonify({"status":"success"})
         else:
@@ -101,23 +113,40 @@ def add_application():
     else:
         return jsonify({"status":"required params not provided"})
 
-@app.route('/get_application_by_id',methods=['GET'])
+@app.route('/get_application_by_id',methods=['POST'])
 def wrapper_get_application_by_id():
-    return jsonify(get_application_by_id(given_id))
+    data = request.get_json()
+    if 'id' in data:
+        given_id = data['id']
+        application = get_application_by_id(given_id)
+        if application is not None:
+            return jsonify(get_application_by_id(given_id))
+        else:
+            return jsonify({"status": "No such application."})
+    else:
+        return jsonify({"status": "id not provided"})
 
 @app.route('/update_application',methods=['POST'])
 def update_application():
+    required_fields = ['id', 'new_status']
     data = request.get_json()
-    applicant_data = get_application_by_id(data['id'])
-    if applicant_data is not None:
-        applicant_data['status'] = data['status']
-        r = requests.post('http://40.65.176.117:5000/apply_loan', json=applicant_data)
-        if (r.status_code == 200):
+    checks = [field in data for field in required_fields]
+    if all(checks):
+        data = request.get_json()
+        applicant_data = get_application_by_id(data['id'])
+        if applicant_data is not None:
+            applicant_data['status'] = data['new_status']
+            finaldata = json.dumps(applicant_data)
+
+            hexval = finaldata.encode('utf-8')
+            curid = datetime.datetime.now()
+            multichain.publish("strm1", str(curid), hexval.hex())
+
             return jsonify({"status":"success"})
         else:
-            return jsonify({"status":"failure"})
+            return jsonify({"status":"applicant doesn't exist"})
     else:
-        return jsonify({"status":"applicant doesn't exist"})
+        return jsonify({"status": "required params not provided"})
 
 if __name__ == "__main__":
     app.run(debug=True,host='0.0.0.0', port=5000)
