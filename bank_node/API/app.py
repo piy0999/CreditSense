@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from Savoir import Savoir
 import requests, json, time, datetime, hashlib
+from random import randint
 
 app = Flask(__name__)
 
@@ -17,7 +18,6 @@ def connect():
 
 multichain = connect()
 
-#multichain.create('stream','strm1',True)
 
 def hash(unhashed):
     byte_id = unhashed.encode('utf-8')
@@ -46,14 +46,14 @@ def all_applications():
             applications[application['id']] = [application]
     return applications
 
-def get_all_application_by_id(given_id):
+def get_latest_application_by_id(given_id):
     data = all_latest_applications()
     if hash(given_id) in data:
         return data[hash(given_id)]
     else:
         return None
 
-def get_latest_application_by_id(given_id):
+def get_all_applications_by_id(given_id):
     hashed_id = hash(given_id)
     multichain.subscribe("strm1")
     data = multichain.liststreamitems("strm1")
@@ -95,6 +95,37 @@ def status():
         'approved_applications':approved_applications,
         'disapproved_applications':disapproved_applications
     })
+
+@app.route('/get_past_data',methods=['GET'])
+def get_past_data():
+    bank_loan_revenue = str(randint(3000000,10000000))
+    completed_applications = {'Jan':randint(200,400),
+    'Feb':randint(100,300),
+    'Mar':randint(100,300),
+    'Apr':randint(100,300),
+    'May':randint(100,300),
+    'June':randint(100,300),
+    'July':randint(100,300),
+    'Aug':randint(100,300),
+    'Sept':randint(100,300),
+    'Oct':randint(100,300),
+    'Nov':randint(100,300),
+    'Dec':randint(100,300)}
+
+    loan_promotion_campaign = {'Jan':randint(200,400),
+    'Feb':randint(200,600),
+    'Mar':randint(200,600),
+    'Apr':randint(200,600),
+    'May':randint(200,600),
+    'June':randint(200,600),
+    'July':randint(200,600),
+    'Aug':randint(200,600),
+    'Sept':randint(200,600),
+    'Oct':randint(200,600),
+    'Nov':randint(200,600),
+    'Dec':randint(200,600)}
+
+    return jsonify({'bank_loan_revenue':bank_loan_revenue,'completed_applications':completed_applications,'loan_promotion_campaign':loan_promotion_campaign})
 
 @app.route('/all_applications',methods=['GET'])
 def wrapper_all_applications():
@@ -155,8 +186,12 @@ def update_application():
     data = request.get_json()
     checks = [field in data for field in required_fields]
     if all(checks):
-        data = request.get_json()
-        applicant_data = get_application_by_id(data['id'])
+        applicant_data = None
+        hashed_id = data['id']
+        applications_data = all_latest_applications()
+        if hashed_id in applications_data:
+            applicant_data = applications_data[hashed_id]
+        #applicant_data = get_latest_application_by_id(data['id'])
         if applicant_data is not None:
             applicant_data['status'] = data['new_status']
             finaldata = json.dumps(applicant_data)

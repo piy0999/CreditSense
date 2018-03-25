@@ -279,6 +279,7 @@ $(document).ready(function() {
   });
 
   $.get('http://localhost:5000/get_past_data', function(data) {
+    console.log(data.bank_loan_revenue);
     completed_applications = data.completed_applications;
     loan_promotion_campaign = data.loan_promotion_campaign;
     $('#bank_loan_revenue').text('$'+data.bank_loan_revenue.replace(/(\d)(?=(\d{3})+(,|$))/g, '$1,'));

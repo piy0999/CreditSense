@@ -123,15 +123,10 @@
                                           <th>HKID</th>
                                           <th>Home Ownership</th>
                                           <th>Score</th>
-                                          <th>Decision</th>
+                                          <th>Approve</th>
+                                          <th>Disapprove</th>
                                         </thead>
                                       <tbody id="applications">
-                                          <tr>
-                                              <td>Dakota Rice</td>
-                                              <td>Niger</td>
-                                              <td>Oud-Turnhout</td>
-                                              <td class="text-primary">$36,738</td>
-                                          </tr>
                                       </tbody>
                                   </table>
                               </div>
@@ -183,10 +178,35 @@
 $(document).ready(function() {
   $.get('http://localhost:5000/pending_applications', function(data) {
     for (var i = 0; i < data.length; i++){
-      $('#applications').append('<tr><td>'+data[i]['id']+'</td><td>'+data[i]['home_ownership']+'</td><td>'+data[i]['score']+'</td><td class="text-primary">$36,738</td></tr>');
+      id = unhash(data[i]['id'])
+      $('#applications').append('<tr id="'+id+'"><td>'+id+'</td><td>'+data[i]['home_ownership']+'</td><td>'+data[i]['score']+'</td><td><button type="button" class="btn btn-primary" onclick=\'submit_decision("'+id+'","approved")\'>Approve</button></td><td><button type="button" class="btn btn-primary" onclick=\'submit_decision("'+id+'","disapproved")\'>Disapprove</button></td></tr>');
     }
   });
+
+  unhash = function(hashed_id){
+    return hashed_id;
+  }
+
+  submit_decision = function (id,decision){
+    $.ajax({
+      url:"http://localhost:5000/update_application",
+      type:"POST",
+      data:JSON.stringify({'id':id,'new_status':decision}),
+      contentType:"application/json; charset=utf-8",
+      dataType:"json",
+      success: function(response){
+        console.log(response);
+        if (response.status === "success"){
+          alert("Successfully submitted decision.");
+          $('#'+id).remove();
+        } else {
+          alert("Decision not submitted.");
+        }
+      }
+    });
+  }
 });
+
 </script>
 <script src="/javascripts/bootstrap.min.js" type="text/javascript"></script>
 <script src="/javascripts/material.min.js" type="text/javascript"></script>
