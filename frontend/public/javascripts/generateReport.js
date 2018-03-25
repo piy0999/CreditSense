@@ -18,44 +18,42 @@ old_report_request = function() {
   };
 };
 
-let id;
-
 submit_report_request = function() {
-  id = document.getElementById('hkid_val').value;
+  var id = document.getElementById('hkid_val').value;
+  console.log(id);
   var data = {};
   data['id'] = id;
   var json = JSON.stringify(data);
-  if (!id) {
+  if (id !== null) {
     $.ajax({
       type: 'POST',
-      url: 'http://localhost:5000/get_application_by_id',
+      url: 'http://localhost:5000/get_all_applications_by_id',
       headers: {
         'Content-Type': 'application/json'
       },
       dataType: 'json',
       data: json,
-      success: function(returndata) {
+      success: function(applicant) {
         $('#form').hide();
-        var applicant = returndata;
-        $('#score').html(applicant['score']);
-        var tableObject = [];
-        applicant.forEach(function(item, index) {
-          for (var key in item) {
-            if (
-              key === 'id' ||
-              key === 'loan_amnt' ||
-              key === 'score' ||
-              key === 'status'
-            ) {
-              var temp = {};
-              temp[key] = item[key];
-            }
-            tableObject.push(temp);
-          }
-        });
-        $('#itemTemplate')
-          .tmpl(tableObject)
-          .appendTo('#itemList tbody');
+        console.log(applicant[0].id);
+        $('#score').html(applicant[0].score);
+        $('#score').css('text-align', 'center');
+        $('#score').css('font-size', '60px');
+        $('#score').css('font-weight', 'bold');
+        $('#score').css('color', 'tomato');
+        for (var i = 0; i < applicant.length; i++) {
+          $('#itemList').append(
+            '<tr><td>' +
+              id +
+              '</td><td>' +
+              applicant[i]['home_ownership'] +
+              '</td><td>' +
+              applicant[i]['status'] +
+              '</td><td>' +
+              applicant[i]['score'] +
+              '</td></tr>'
+          );
+        }
         $('#report').show();
       }
     });
