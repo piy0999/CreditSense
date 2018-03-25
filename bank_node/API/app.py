@@ -66,7 +66,7 @@ def index():
 
 @app.route('/status',methods=['GET'])
 def status():
-    data = list(all_applications().values())
+    data = list(all_latest_applications().values())
 
     total_applications = len(data)
     pending_applications = 0

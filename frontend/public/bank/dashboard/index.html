@@ -19,15 +19,15 @@
 
 <body>
     <div class="wrapper">
-        <div class="sidebar" data-color="purple" data-image="../assets/img/sidebar-1.jpg">
+        <div class="sidebar" data-color="purple" data-image="/images/sidebar-1.jpg">
             <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
 
         Tip 2: you can also add an image using data-image tag
     -->
             <div class="logo">
-                <a href="http://www.creative-tim.com" class="simple-text">
-                    Bank Of China
+                <a href="http://www.contoso-bank.com/" class="simple-text">
+                    Contoso Bank
                 </a>
             </div>
             <div class="sidebar-wrapper">
@@ -57,7 +57,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#"> BANK OF CHINA Dashboard </a>
+                        <a class="navbar-brand" href="#"> Contoso Bank Dashboard </a>
                     </div>
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-right">
@@ -121,7 +121,7 @@
                                 </div>
                                 <div class="card-content">
                                     <p class="category">Loan Applications</p>
-                                    <h3 class="title">20658
+                                    <h3 class="title" id="total_applications">
                                     </h3>
                                 </div>
                                 <div class="card-footer">
@@ -150,32 +150,32 @@
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-6">
                             <div class="card card-stats">
-                                <div class="card-header" data-background-color="red">
-                                    <i class="material-icons">info_outline</i>
+                                <div class="card-header" data-background-color="blue">
+                                    <i class="fa fa-twitter"></i>
                                 </div>
                                 <div class="card-content">
-                                    <p class="category">Applications Pending</p>
-                                    <h3 class="title">15</h3>
+                                    <p class="category">Applications Approved</p>
+                                    <h3 class="title" id="approved_applications"></h3>
                                 </div>
                                 <div class="card-footer">
                                     <div class="stats">
-                                        <i class="material-icons">local_offer</i> Tracked from Ethereum
+                                        <i class="material-icons">update</i> Just Updated
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-6">
                             <div class="card card-stats">
-                                <div class="card-header" data-background-color="blue">
-                                    <i class="fa fa-twitter"></i>
+                                <div class="card-header" data-background-color="red">
+                                    <i class="material-icons">info_outline</i>
                                 </div>
                                 <div class="card-content">
-                                    <p class="category">Status Update Requests</p>
-                                    <h3 class="title">1245</h3>
+                                    <p class="category">Applications Pending</p>
+                                    <h3 class="title" id="pending_applications"></h3>
                                 </div>
                                 <div class="card-footer">
                                     <div class="stats">
-                                        <i class="material-icons">update</i> Just Updated
+                                        <i class="material-icons">local_offer</i> Tracked from Ethereum
                                     </div>
                                 </div>
                             </div>
@@ -529,7 +529,7 @@
                         <script>
                         document.write(new Date().getFullYear());
 </script>
-                        <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
+                        <a href="http://www.contoso-bank.com/">Contoso Bank</a>, made with love for a better web
                     </p>
                 </div>
             </footer>
@@ -537,21 +537,24 @@
     </div>
 </body>
 <script src="/javascripts/jquery-3.2.1.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+  $.get('http://localhost:5000/status', function(data) {
+    console.log(data);
+    $('#total_applications').text(data.total_applications);
+    $('#approved_applications').text(data.approved_applications);
+    $('#pending_applications').text(data.pending_applications);
+  });
+  // Javascript method's body can be found in assets/js/demos.js
+  demo.initDashboardPageCharts();
+});
+</script>
 <script src="/javascripts/bootstrap.min.js" type="text/javascript"></script>
 <script src="/javascripts/material.min.js" type="text/javascript"></script>
 <script src="/javascripts/chartist.min.js"></script>
 <script src="/javascripts/arrive.min.js"></script>
 <script src="/javascripts/perfect-scrollbar.jquery.min.js"></script>
 <script src="/javascripts/bootstrap-notify.js"></script>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
 <script src="/javascripts/material-dashboard.js?v=1.2.0"></script>
 <script src="/javascripts/demo.js"></script>
-<script src="/javascripts/senddata.js" type="text/javascript"></script>
-<script type="text/javascript">
-$(document).ready(function() {
-  // Javascript method's body can be found in assets/js/demos.js
-  demo.initDashboardPageCharts();
-});
-</script>
-
 </html>
