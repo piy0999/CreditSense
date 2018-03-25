@@ -29,6 +29,7 @@ def all_latest_applications():
     multichain.subscribe("strm1")
     data = multichain.liststreamitems("strm1")
     applications = {}
+    print("data is printed")
     for application in data:
         application = json.loads(bytearray.fromhex(application['data']).decode())
         applications[application['id']] = application
@@ -45,13 +46,6 @@ def all_applications():
         else:
             applications[application['id']] = [application]
     return applications
-
-def get_latest_application_by_id(given_id):
-    data = all_applications()
-    if hash(given_id) in data:
-        return data[hash(given_id)]
-    else:
-        return None
 
 def get_latest_application_by_id(given_id):
     data = all_applications()
@@ -110,21 +104,17 @@ def add_application():
                 'total_acc', 'initial_list_status', 'total_pymnt', 'total_pymnt_inv',
                 'total_rec_prncp', 'total_rec_int', 'last_pymnt_amnt',
                 'total_rev_hi_lim', 'loan_status_coded']
-    required_fields = ['id','loan_amnt', 'funded_amnt', 'funded_amnt_inv', 'term', 'int_rate',
-                'installment', 'grade', 'sub_grade', 'emp_length', 'home_ownership',
-                'annual_inc', 'purpose', 'dti',
-                'delinq_2yrs', 'inq_last_6mths', 'open_acc', 'revol_bal', 'revol_util',
-                'total_acc', 'initial_list_status', 'total_pymnt', 'total_pymnt_inv',
-                'total_rec_prncp', 'total_rec_int', 'last_pymnt_amnt']
+    required_fields = ['id','dti','inq_last_6mths','open_acc','emp_length_num','revol_util','grade','payment_inc_ratio','purpose','delinq_2yrs_zero','pub_rec_zero','pub_rec','short_emp','home_ownership','sub_grade_num','last_major_derog_none','last_delinq_none','delinq_2yrs']
     data = request.get_json()
     checks = [field in data for field in required_fields]
+    print(checks)
     if all(checks):
         application = {}
         for field in required_fields:
             application[field] = data[field]
         application['id'] = hash(data['id'])
         application['status'] = 'pending'
-        r = requests.post('http://0.0.0.0:3000/add_scored_application', json=application)
+        r = requests.post('http://0.0.0.0:4000/add_scored_application', json=application)
         if (r.status_code == 200):
             return jsonify({"status":"success"})
         else:
@@ -137,9 +127,9 @@ def wrapper_get_application_by_id():
     data = request.get_json()
     if 'id' in data:
         given_id = data['id']
-        application = get_application_by_id(given_id)
+        application = get_latest_application_by_id(given_id)
         if application is not None:
-            return jsonify(get_application_by_id(given_id))
+            return jsonify(get_latest_application_by_id(given_id))
         else:
             return jsonify({"status": "No such application."})
     else:
