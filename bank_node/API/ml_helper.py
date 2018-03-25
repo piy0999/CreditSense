@@ -1,8 +1,8 @@
 import pickle, json
 import pandas as pd, numpy as np
 
-loaded_model = pickle.load(open('finalized_model.sav', 'rb'))
-loaded_mapper = pickle.load(open('mapper.pkl', 'rb'))
+loaded_model = pickle.load(open('../../Deep Learning Model/finalized_model.sav', 'rb'))
+loaded_mapper = pickle.load(open('../../Deep Learning Model/mapper.pkl', 'rb'))
 
 def preProcess(a, mapper,parameter_cols):
     data=list(a.values())

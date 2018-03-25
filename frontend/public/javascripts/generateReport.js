@@ -1,4 +1,4 @@
-function() {
+old_report_request = function() {
   var x = document.getElementById('submit');
   x.onclick = function() {
     var xhttp = new XMLHttpRequest();
