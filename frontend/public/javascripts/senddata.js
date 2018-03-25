@@ -21,23 +21,74 @@ list = [
 
 var obj = {
   id: '1077501',
-  delinq_2yrs_zero: '0',
-  delinq_2yrs: '12',
-  dti: '27.65',
-  emp_length_num: '10',
+  member_id: '1296599',
+  loan_amnt: '5000',
+  funded_amnt: '5000',
+  funded_amnt_inv: '4975',
+  term: ' 36 months',
+  int_rate: '10.65',
+  installment: '162.87',
   grade: 'B',
+  sub_grade: 'B2',
+  emp_title: '',
+  emp_length: '10+ years',
   home_ownership: 'RENT',
-  payment_inc_ratio: '10.85',
-  inq_last_6mths: '1',
-  last_major_derog_none: '2.76',
-  last_delinq_none: '7.87',
-  open_acc: '3',
-  pub_rec_zero: '1.87',
-  pub_rec: '753',
-  short_emp: '1921',
+  annual_inc: '24000',
+  is_inc_v: 'Verified',
+  issue_d: '20111201T000000',
+  loan_status: 'Fully Paid',
+  pymnt_plan: 'n',
+  url: 'https://www.lendingclub.com/browse/loanDetail.action?loan_id=1077501',
+  desc:
+    '  Borrower added on 12/22/11 > I need to upgrade my business technologies.<br>',
   purpose: 'credit_card',
+  title: 'Computer',
+  zip_code: '860xx',
+  addr_state: 'AZ',
+  dti: '27.65',
+  delinq_2yrs: '0',
+  earliest_cr_line: '19850101T000000',
+  inq_last_6mths: '1',
+  mths_since_last_delinq: '',
+  mths_since_last_record: '',
+  open_acc: '3',
+  pub_rec: '0',
+  revol_bal: '13648',
   revol_util: '83.7',
-  sub_grade_num: 'B2'
+  total_acc: '9',
+  initial_list_status: 'f',
+  out_prncp: '0',
+  out_prncp_inv: '0',
+  total_pymnt: '5861.07',
+  total_pymnt_inv: '5831.78',
+  total_rec_prncp: '5000',
+  total_rec_int: '861.07',
+  total_rec_late_fee: '0',
+  recoveries: '0',
+  collection_recovery_fee: '0',
+  last_pymnt_d: '20150101T000000',
+  last_pymnt_amnt: '171.62',
+  next_pymnt_d: '',
+  last_credit_pull_d: '20150101T000000',
+  collections_12_mths_ex_med: '0',
+  mths_since_last_major_derog: '',
+  policy_code: '1',
+  not_compliant: '0',
+  status: 'Fully Paid',
+  inactive_loans: '1',
+  bad_loans: '0',
+  emp_length_num: '11',
+  grade_num: '5',
+  sub_grade_num: '0.4',
+  delinq_2yrs_zero: '1',
+  pub_rec_zero: '1',
+  collections_12_mths_zero: '1',
+  short_emp: '0',
+  payment_inc_ratio: '8.1435',
+  final_d: '20141201T000000',
+  last_delinq_none: '1',
+  last_record_none: '1',
+  last_major_derog_none: '1'
 };
 
 function getRandomInt(min, max) {
@@ -50,8 +101,10 @@ window.onload = function() {
     var xhttp = new XMLHttpRequest();
     xhttp.open('POST', 'http://localhost:5000/add_application', true);
     xhttp.setRequestHeader('Content-type', 'application/json');
-    for (i in obj) {
-      document.getElementById(i).defaultValue = obj[i];
+    xhttp.responseType = 'json';
+    for (var i = 0; i < list.length; i++) {
+      key = list[i];
+      document.getElementById(key).defaultValue = obj[key];
     }
 
     var data = {};
@@ -60,12 +113,13 @@ window.onload = function() {
       var val = document.getElementById(list[i]).value;
       data[list[i]] = val;
     }
-    console.log(data);
+    console.log(JSON.stringify(data));
     var lamda = JSON.stringify(data);
     xhttp.send(lamda);
 
-    xhttp.onload = function(data) {
-      if (data['status'] === 'success') {
+    xhttp.onload = function() {
+      res = xhttp.response;
+      if (res['status'] === "success") {
         alert('Your application has been received');
       } else {
         alert('error');
