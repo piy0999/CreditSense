@@ -1,43 +1,59 @@
 list = [
   'id',
+  'loan_amnt',
+  'funded_amnt',
+  'funded_amnt_inv',
+  'term',
+  'int_rate',
+  'installment',
+  'grade',
+  'sub_grade',
+  'emp_length',
+  'home_ownership',
+  'annual_inc',
+  'purpose',
   'dti',
+  'delinq_2yrs',
   'inq_last_6mths',
   'open_acc',
-  'emp_length_num',
+  'revol_bal',
   'revol_util',
-  'grade',
-  'payment_inc_ratio',
-  'purpose',
-  'delinq_2yrs_zero',
-  'pub_rec_zero',
-  'pub_rec',
-  'short_emp',
-  'home_ownership',
-  'sub_grade_num',
-  'last_major_derog_none',
-  'last_delinq_none',
-  'delinq_2yrs'
+  'total_acc',
+  'initial_list_status',
+  'total_pymnt',
+  'total_pymnt_inv',
+  'total_rec_prncp',
+  'total_rec_int',
+  'last_pymnt_amnt'
 ];
 
 var obj = {
-  id: '1077501',
-  delinq_2yrs_zero: '0',
-  delinq_2yrs: '12',
+  annual_inc: '24000',
+  delinq_2yrs: '0',
   dti: '27.65',
-  emp_length_num: '10',
+  emp_length: '10+ years',
+  funded_amnt: '5000',
+  funded_amnt_inv: '4975',
   grade: 'B',
   home_ownership: 'RENT',
-  payment_inc_ratio: '10.85',
+  id: '1077501',
+  initial_list_status: 'f',
   inq_last_6mths: '1',
-  last_major_derog_none: '2.76',
-  last_delinq_none: '7.87',
+  installment: '162.87',
+  int_rate: '10.65',
+  last_pymnt_amnt: '171.62',
+  loan_amnt: '5000',
   open_acc: '3',
-  pub_rec_zero: '1.87',
-  pub_rec: '753',
-  short_emp: '1921',
   purpose: 'credit_card',
+  revol_bal: '13648',
   revol_util: '83.7',
-  sub_grade_num: 'B2'
+  sub_grade: 'B2',
+  term: ' 36 months',
+  total_acc: '9',
+  total_pymnt: '5861.07',
+  total_pymnt_inv: '5831.78',
+  total_rec_int: '861.07',
+  total_rec_prncp: '5000'
 };
 
 function getRandomInt(min, max) {
@@ -56,7 +72,7 @@ window.onload = function() {
 
     var data = {};
     data['id'] = getRandomInt(1, 10000).toString();
-    for (var i = 0; i < list.length; i++) {
+    for (var i = 1; i < list.length; i++) {
       var val = document.getElementById(list[i]).value;
       data[list[i]] = val;
     }
@@ -64,12 +80,8 @@ window.onload = function() {
     var lamda = JSON.stringify(data);
     xhttp.send(lamda);
 
-    xhttp.onload = function(data) {
-      if (data['status'] === 'success') {
-        alert('Your application has been received');
-      } else {
-        alert('error');
-      }
+    xhttp.onload = function() {
+      alert('Your application has been received');
     };
   };
 };

@@ -59,3 +59,4 @@ def trim_features(loan):
     drop_issue_d(loan)
     drop_addr_state(loan)
     drop_last_credit_pull_d(loan)
+    

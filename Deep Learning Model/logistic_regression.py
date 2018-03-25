@@ -102,6 +102,38 @@ log_lm.score(X_test, y_test)
 filename = 'finalized_model.sav'
 pickle.dump(log_lm, open(filename, 'wb'))
 
+a={ 'delinq_2yrs': df.delinq_2yrs.item(),
+'delinq_2yrs_zero': df.delinq_2yrs_zero.item(),
+'dti': df.dti.item(),
+'emp_length_num': df.emp_length_num.item(),
+'grade': df.grade.item(),
+'home_ownership': df.home_ownership.item(),
+'inq_last_6mths': df.inq_last_6mths.item(),
+'last_delinq_none': df.last_delinq_none.item(),
+'last_major_derog_none': df.last_major_derog_none.item(),
+'open_acc': df.open_acc.item(),
+'payment_inc_ratio': df.payment_inc_ratio.item(),
+'pub_rec': df.pub_rec.item(),
+'pub_rec_zero': df.pub_rec_zero.item(),
+'purpose': df.purpose.item(),
+'revol_util': df.revol_util.item(),
+'short_emp': df.short_emp.item(),
+'sub_grade_num': df.sub_grade_num.item()}
+
+XX=preProcess(a, mapper,parameter_cols)
+
+filename = 'finalized_model.sav'
+pickle.dump(log_lm, open(filename, 'wb'))
+
+pickle.dump(mapper, open( "mapper.pkl", "wb") )
+
+score = log_lm.predict_proba(XX)[:,1][0]
+
+score = score * 10
+score = 10 - score
+score = str(score)
+
+
 #Sending out post
 #r = requests.post('https://hooks.zapier.com/hooks/catch/2888786/80e87z/', data = {'Credit Score': score})
 

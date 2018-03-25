@@ -48,6 +48,7 @@ features = ['loan_amnt', 'funded_amnt', 'funded_amnt_inv', 'term', 'int_rate',
             'total_rec_prncp', 'total_rec_int', 'last_pymnt_amnt',
             'total_rev_hi_lim', 'loan_status_coded']
 
+
 categorical = ['term', 'grade', 'emp_length', 'home_ownership', 'verification_status',
                'purpose', 'initial_list_status']
 

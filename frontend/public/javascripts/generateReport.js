@@ -18,7 +18,48 @@ old_report_request = function() {
   };
 };
 
+let id;
+
 submit_report_request = function() {
-  $('#form').hide();
-  $('#report').show();
+  id = document.getElementById('hkid_val').value;
+  var data = {};
+  data['id'] = id;
+  var json = JSON.stringify(data);
+  if (!id) {
+    $.ajax({
+      type: 'POST',
+      url: url,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      dataType: 'json',
+      data: json,
+      success: function(returndata) {
+        $('#form').hide();
+        var applicant = returndata;
+        $('#score').html(applicant['score']);
+        var tableObject = [];
+        applicant.forEach(function(item, index) {
+          for (var key in item) {
+            if (
+              key === 'id' ||
+              key === 'loan_amnt' ||
+              key === 'score' ||
+              key === 'status'
+            ) {
+              var temp = {};
+              temp[key] = item[key];
+            }
+            tableObject.push(temp);
+          }
+        });
+        $('#itemTemplate')
+          .tmpl(tableObject)
+          .appendTo('#itemList tbody');
+        $('#report').show();
+      }
+    });
+  } else {
+    alert('Please enter ID');
+  }
 };
