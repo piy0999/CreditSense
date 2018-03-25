@@ -109,127 +109,37 @@
                 </div>
             </nav>
             <div class="content">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-6 col-sm-6">
-                            <div class="card card-stats">
-                                <div class="card-header" data-background-color="orange">
-                                    <i class="material-icons">content_copy</i>
-                                </div>
-                                <div class="card-content">
-                                    <p class="category">Loan Applications</p>
-                                    <h3 class="title" id="total_applications">
-                                    </h3>
-                                </div>
-                                <div class="card-footer">
-                                    <div class="stats">
-                                        <i class="material-icons">update</i> Just Updated
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6">
-                            <div class="card card-stats">
-                                <div class="card-header" data-background-color="green">
-                                    <i class="material-icons">store</i>
-                                </div>
-                                <div class="card-content">
-                                    <p class="category">Bank Loan Revenue</p>
-                                    <h3 class="title" id="bank_loan_revenue"></h3>
-                                </div>
-                                <div class="card-footer">
-                                    <div class="stats">
-                                        <i class="material-icons">date_range</i> Last Month
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6">
-                            <div class="card card-stats">
-                                <div class="card-header" data-background-color="blue">
-                                    <i class="fa fa-twitter"></i>
-                                </div>
-                                <div class="card-content">
-                                    <p class="category">Applications Approved</p>
-                                    <h3 class="title" id="approved_applications"></h3>
-                                </div>
-                                <div class="card-footer">
-                                    <div class="stats">
-                                        <i class="material-icons">update</i> Just Updated
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6">
-                            <div class="card card-stats">
-                                <div class="card-header" data-background-color="red">
-                                    <i class="material-icons">info_outline</i>
-                                </div>
-                                <div class="card-content">
-                                    <p class="category">Applications Pending</p>
-                                    <h3 class="title" id="pending_applications"></h3>
-                                </div>
-                                <div class="card-footer">
-                                    <div class="stats">
-                                        <i class="material-icons">local_offer</i> Just Updated
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="card">
-                                <div class="card-header card-chart" data-background-color="green">
-                                    <div class="ct-chart" id="dailySalesChart"></div>
-                                </div>
-                                <div class="card-content">
-                                    <h4 class="title">Bank Share Performance</h4>
-                                    <p class="category">
-                                        <span class="text-success"><i class="fa fa-long-arrow-up"></i> +2%</span> Share increasing</p>
-                                </div>
-                                <div class="card-footer">
-                                    <div class="stats">
-                                        <i class="material-icons">access_time</i> Just Updated
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card">
-                                <div class="card-header card-chart" data-background-color="orange">
-                                    <div class="ct-chart" id="emailsSubscriptionChart"></div>
-                                </div>
-                                <div class="card-content">
-                                    <h4 class="title">Loan Promotion Campaign</h4>
-                                    <p class="category">Last Campaign Performance</p>
-                                </div>
-                                <div class="card-footer">
-                                    <div class="stats">
-                                        <i class="material-icons">access_time</i> Just Updated
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card">
-                                <div class="card-header card-chart" data-background-color="red">
-                                    <div class="ct-chart" id="completedTasksChart"></div>
-                                </div>
-                                <div class="card-content">
-                                    <h4 class="title">Completed Applications</h4>
-                                    <p class="category">Previous Performances</p>
-                                </div>
-                                <div class="card-footer">
-                                    <div class="stats">
-                                        <i class="material-icons">access_time</i> Just Updated
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+              <div class="container-fluid">
+                  <div class="row">
+                      <div class="col-md-12">
+                          <div class="card">
+                            <div class="card-header" data-background-color="purple">
+                                  <h4 class="title">Pending Loan Applications</h4>
+                                  <p class="category">Preview of pending loan applications.</p>
+                              </div>
+                              <div class="card-content table-responsive">
+                                  <table class="table">
+                                      <thead class="text-primary">
+                                          <th>HKID</th>
+                                          <th>Home Ownership</th>
+                                          <th>Score</th>
+                                          <th>Decision</th>
+                                        </thead>
+                                      <tbody id="applications">
+                                          <tr>
+                                              <td>Dakota Rice</td>
+                                              <td>Niger</td>
+                                              <td>Oud-Turnhout</td>
+                                              <td class="text-primary">$36,738</td>
+                                          </tr>
+                                      </tbody>
+                                  </table>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
             <footer class="footer">
                 <div class="container-fluid">
                     <nav class="pull-left">
@@ -271,30 +181,11 @@
 <script src="/javascripts/jquery-3.2.1.min.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-  $.get('http://localhost:5000/status', function(data) {
-    console.log(data);
-    $('#total_applications').text(data.total_applications);
-    $('#approved_applications').text(data.approved_applications);
-    $('#pending_applications').text(data.pending_applications);
-  });
-
-  $.get('http://localhost:5000/get_past_data', function(data) {
-    completed_applications = data.completed_applications;
-    loan_promotion_campaign = data.loan_promotion_campaign;
-    $('#bank_loan_revenue').text('$'+data.bank_loan_revenue.replace(/(\d)(?=(\d{3})+(,|$))/g, '$1,'));
-    loan_applications_graph(loan_promotion_campaign);
-    completed_applications_graph(completed_applications);
-  });
-
-  $.get('https://www.alphavantage.co/query?apikey=demo&function=TIME_SERIES_DAILY_ADJUSTED&symbol=MSFT',function(data){
-    last_week_prices = [];
-    last_dates = Object.keys(data['Time Series (Daily)']);
-    for (var i = 0; i < 14; i++){
-      last_week_prices.push(data['Time Series (Daily)'][last_dates[i]]['4. close']);
+  $.get('http://localhost:5000/pending_applications', function(data) {
+    for (var i = 0; i < data.length; i++){
+      $('#applications').append('<tr><td>'+data[i]['id']+'</td><td>'+data[i]['home_ownership']+'</td><td>'+data[i]['score']+'</td><td class="text-primary">$36,738</td></tr>');
     }
-    bank_share_prices(last_week_prices);
   });
-  // Javascript method's body can be found in assets/js/demos.js
 });
 </script>
 <script src="/javascripts/bootstrap.min.js" type="text/javascript"></script>

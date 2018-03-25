@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from Savoir import Savoir
-import json, time, datetime, random
+import json, time, datetime, random, binascii
 from ml_helper import calculate_score
 
 app = Flask(__name__)
@@ -56,7 +56,7 @@ def get_credit_score():
 
 		hexval = finaldata.encode('utf-8')
 		curid = datetime.datetime.now()
-		#multichain.publish("strm1", str(curid), hexval.hex())
+		multichain.publish("strm1", str(curid), binascii.hexlify(hexval))
 
 		#send_email('A loan application has been submitted - Bank 1','User #' + str(data['id']) + ' has applied for a loan. Check credit sense portal for details and credit score.')
 
