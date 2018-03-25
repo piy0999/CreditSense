@@ -109,7 +109,7 @@ window.onload = function() {
 
     var data = {};
     data['id'] = getRandomInt(1, 10000).toString();
-    for (var i = 0; i < list.length; i++) {
+    for (var i = 1; i < list.length; i++) {
       var val = document.getElementById(list[i]).value;
       data[list[i]] = val;
     }
@@ -119,7 +119,7 @@ window.onload = function() {
 
     xhttp.onload = function() {
       res = xhttp.response;
-      if (res['status'] === "success") {
+      if (res['status'] === 'success') {
         alert('Your application has been received');
       } else {
         alert('error');
