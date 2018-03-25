@@ -28,7 +28,7 @@ submit_report_request = function() {
   if (!id) {
     $.ajax({
       type: 'POST',
-      url: url,
+      url: 'http://localhost:5000/get_application_by_id',
       headers: {
         'Content-Type': 'application/json'
       },
