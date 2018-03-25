@@ -29,7 +29,6 @@ def all_latest_applications():
     multichain.subscribe("strm1")
     data = multichain.liststreamitems("strm1")
     applications = {}
-    print("data is printed")
     for application in data:
         application = json.loads(bytearray.fromhex(application['data']).decode())
         applications[application['id']] = application
@@ -47,12 +46,27 @@ def all_applications():
             applications[application['id']] = [application]
     return applications
 
-def get_latest_application_by_id(given_id):
-    data = all_applications()
+def get_all_application_by_id(given_id):
+    data = all_latest_applications()
     if hash(given_id) in data:
         return data[hash(given_id)]
     else:
         return None
+
+def get_latest_application_by_id(given_id):
+    hashed_id = hash(given_id)
+    multichain.subscribe("strm1")
+    data = multichain.liststreamitems("strm1")
+    applications = []
+    for application in data:
+        application = json.loads(bytearray.fromhex(application['data']).decode())
+        if application['id'] == hashed_id:
+            applications.append(application)
+    return applications
+    if len(application) == 0:
+        return None
+    else:
+        return applications
 
 @app.route('/')
 def index():
@@ -84,11 +98,11 @@ def status():
 
 @app.route('/all_applications',methods=['GET'])
 def wrapper_all_applications():
-    return jsonify(list(all_applications().values()))
+    return jsonify(list(all_latest_applications().values()))
 
 @app.route('/pending_applications',methods=['GET'])
 def pending_applications():
-    applications = list(all_applications().values())
+    applications = list(all_latest_applications().values())
     pending_applications = []
     for application in applications:
         if application['status'] == 'pending':
@@ -122,16 +136,16 @@ def add_application():
     else:
         return jsonify({"status":"required params not provided"})
 
-@app.route('/get_application_by_id',methods=['POST'])
+@app.route('/get_all_applications_by_id',methods=['POST'])
 def wrapper_get_application_by_id():
     data = request.get_json()
     if 'id' in data:
         given_id = data['id']
-        application = get_latest_application_by_id(given_id)
-        if application is not None:
-            return jsonify(get_latest_application_by_id(given_id))
+        applications = get_all_applications_by_id(given_id)
+        if applications is not None:
+            return jsonify(applications)
         else:
-            return jsonify({"status": "No such application."})
+            return jsonify({"status": "No such applications found."})
     else:
         return jsonify({"status": "id not provided"})
 
