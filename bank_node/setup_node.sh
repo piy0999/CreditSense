@@ -37,6 +37,7 @@ cat >~/CreditSense/bank_node/API/credentials.json <<EOF
 EOF
 echo '8. Opening ports....'
 sudo ufw allow 22
+sudo ufw allow 80
 sudo ufw allow 5000
 sudo ufw allow $networkport
 sudo ufw --force enable
@@ -45,3 +46,9 @@ echo "Get 60% consensus from the network to grant admin permissions to your addr
 echo '9. Starting flask server...'
 cd ~/CreditSense/bank_node/API
 python3 app.py
+echo '10. Starting frontend...'
+sudo apt-get install nodejs
+sudo apt-get install npm
+cd ~/CreditSense/frontend
+npm install
+sudo npm start
