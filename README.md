@@ -30,11 +30,63 @@ The solution has 4 layers which includes:
 
 <b>The Blockchain architecture:</b> Blockchain is the very base of our application architecture. The application stands due to the very reason that no one is in control of the system as a central manager which can be achieved through the blockchain. We are using ~~Private Ethereum Consortium Network~~ MultiChain to achieve this architecture which provides a secure private blockchain network in which each bank is a mining node which can access the whole blockchain ledger to access the data shared among all the banks which can also be accessed by the machine learning node where our reinforced machine learning model is deployed to return the most accurate credit score. The blockchain is connected to the frontend using Python Flask API. Flask also comes into play when the credit score is returned to the frontend of the bank for bank’s further processing.
 
-#### Setup
+#### Setup (Designed for Microsoft Azure)
+###### Virtual Machine Setup (For Microsoft Azure)
+1. Using Microsoft azure portal -> Login to your account -> Create a resource -> From Popular select Ubunutu Server 17.10 VM
+2. Enter the VM username and password -> select disk size HDD Standard D2S_V3 -> Wait for auto validation and submit deployment
+###### Creating the nodes (One node per Virtual Machine)
+###### Create the Master-Machine Learning Node
+1. In the Azure Portal allow go to the deployed virtual machine and ssh into the machine by clicking on connect and running the ssh command `ssh username@IP`. Enter the VM password during the setup and after successful login you should see `Welcome to Ubuntu 17.10 (GNU/Linux 4.13.0-37-generic x86_64)`
 
-1. To create first node (establish a new network): `curl -s https://raw.githubusercontent.com/piy0999/CreditSense/master/bank_node/setup_master.sh | bash /dev/stdin`
-2. Allow the port for incoming connections in network settings
-3. To join existing network, get IP address and port of any node in existing network, run the following command and ask the network to approve connect request. `curl -s https://raw.githubusercontent.com/piy0999/CreditSense/master/bank_node/setup_node.sh | bash /dev/stdin IP:PORT`
+2. Create the Machine Learning Master Node and set up a fresh Blockchain network by running the command: `curl -s https://raw.githubusercontent.com/piy0999/CreditSense/master/bank_node/setup_master.sh | bash /dev/stdin`
+
+3. Enter OK whenever prompted by Ubuntu and the installation using shell script should begin which takes around 4 minutes. 
+
+4. After Successful installation the flask server initiates with message `Running on http://0.0.0.0:5000/`
+
+6. In the Azure Portal allow the ports to accept incoming connection. Go to the Azure portal Virtual Machine Dashboard
+
+7. Click on the networking tab -> Add inbound port rule. Inside the inbound port rule dialog type in port_ranges 5000 (This allows the API to listen to requests)
+
+8. Create another port rule by clicking Add inbound port rule and inside the inbound port rule dialog type in port_ranges <b> Blockchain Port </b> (This allows the connection with blockchain). The Blockchain Port can be found inside the terminal in the message `Connect to chain1@10.0.0.4:2761 from other nodes` returned just before the message `9. Starting flask server...`. In this case the Blockchain Port is 2761. 
+
+9. Now Setup another node inside the blockchain for further process. Remember to store the <b> chain address <b> with you for further processing which can be found before the `Connect to chain1@10.0.0.4:2761 from other nodes` message. In this case, it is `90c123532b29b4b07b3c072cab67502eabc64531804cb1aa3c741f03bd628dc3`. Please refer to the image for a better understanding. 
+
+10. Use Ctrl-C and after <b> Granting the permission to node </b> press Ctrl-C again. 
+###### Create the Bank Node
+Please setup a new Virtual Machine on Azure before starting the further process using Virtual Machine Setup guide above.
+In the Azure Portal allow go to the deployed virtual machine and ssh into the machine by clicking on connect and running the ssh command `ssh username@IP`. Enter the VM password during the setup and after successful login you should see `Welcome to Ubuntu 17.10 (GNU/Linux 4.13.0-37-generic x86_64)`
+
+1. In the Azure Portal allow the ports to accept incoming connection. Go to the Azure portal Virtual Machine Dashboard
+
+2. Click on the networking tab -> Add inbound port rule. Inside the inbound port rule dialog type in port_ranges 5000 (This allows the API to listen to requests)
+
+3. Click on the networking tab -> Add inbound port rule. Inside the inbound port rule dialog type in port_ranges 80 (This allows the Frontend to run)
+
+3. Create another port rule by clicking Add inbound port rule and inside the inbound port rule dialog type in port_ranges <b> Blockchain Port </b> found during the process of creating Master ML Node (This allows the connection with blockchain)
+
+3. To join existing network, get IP address (IP address is the IP address of the Virtual Machine running the Master-ML Node) and port (Port is the <b> Blockchain Port </b> found during the process of creating Master ML Node) , run the following command by replacing the IP and PORT as specified above. `curl -s https://raw.githubusercontent.com/piy0999/CreditSense/master/bank_node/setup_node.sh | bash /dev/stdin IP:PORT`
+
+3. Enter OK whenever prompted by Ubuntu and the installation using shell script should begin which takes around 4 minutes.
+
+4. After finishing the setup you should see the message `frontend@0.0.0 start`. 
+
+5. Scroll up inside the terminal until you see the message `9. Starting flask server...` and right above this message the node address is found in the message `Get 60% consensus from the network to grant admin permissions to your address 1BBpVCYkmwWEEGz3MfyAT5G18Fy3ByC7JD2uNd`. Save this address.  
+
+6. Now permission is needed to join the network from the master Machine Learning node. Please follow the instructions for granting the permission to the node found below. 
+
+###### Grant Permissions to bank node
+1. Inside the Master-ML node type `multichain-cli chain1` and then type `getaddresses`. 
+2. Copy the address returned without the double quotes and then type `grant from address(found using above getaddresses command) nodeaddress (sent by the node) admin`. 
+3. If a transaction id is returned then there is no error and the node has been made an admin. 
+
+###### Run the frontend from the bank node
+Please do this process after successfully setting up the Master-ML node and the bank node. 
+1. Go to Google Chrome web browser and type `IP/bank/` in the browser where IP = the node's virtual machine's IP. After clicking login (No need for username and password for now) you can go to the dashboard. 
+2. Type `IP/user/apply_loan/` this is a sample application form which would be inside the bank's online banking portal. Just click on submit which generates a set of data and then sends it to the machine learning node. A dialog box saying `The Application has been received` appears on successful submission. 
+3. After this type `IP/bank/dashboard/` which now shows the number of pending applications, approved applications and total number of applications being queried live from the blockchain. 
+4. Now a bank can <b> Approve or Disapprove </b> the loan by clicking on Pending Applications tab and then selecting approve or disapprove from the list of applicants shown with their crypted IDs and credit scores. 
+5. To generate the credit report of an applicant click on the Applicant data tab and enter the HKID (one of those which have been submitted using the apply_loan form above). This ID should be found from the chrome javascript console where the first parameter in the json object printed on the console is id (as random id's are being generated for testing purposes, it is possible to add your custom ID and data still). Use this ID (you can generate as many ID's and applications as possible) and enter on the Applicant data form which would result in returning of the credit score along with applicant's past applications history. 
 
 <b>The Machine Learning Node:</b> This node is the brain of the whole application as such. The process starts off with the deep learning model which consists of 2 layer neural network with 35 hidden neurons. The model removes the need to analyse each of the 73 factors and instead gives us the set of optimal features required to carry out the analysis with an improving accuracy of 92.71% (Currently migrating to RNN machine learning model with LSTM implementation). Upon finding the optimal features, the logistic regression model then accesses the data of those optimal features for the specific applicant on the ledger and then predicts the probability of the specific applicant to default on his loan. This analytics is further powered by Microsoft Azure Data Lake Analytics and Microsoft Power BI to create the necessary graphs and carry out the required analysis.
 
