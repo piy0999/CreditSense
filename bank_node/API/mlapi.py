@@ -2,8 +2,10 @@ from flask import Flask, request, jsonify
 from Savoir import Savoir
 import json, time, datetime, random, binascii
 from ml_helper import calculate_score
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
+CORS(app)
 
 def connect():
     with open('credentials.json') as json_data:
