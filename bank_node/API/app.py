@@ -163,6 +163,7 @@ def add_application():
             application[field] = data[field]
         application['id'] = hash(data['id'])
         application['status'] = 'pending'
+        print(ml_host)
         r = requests.post('http://'+ml_host+':5000/add_scored_application', json=application)
         if (r.status_code == 200):
             return jsonify({"status":"success"})
