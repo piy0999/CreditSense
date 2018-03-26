@@ -27,7 +27,7 @@ submit_report_request = function() {
   if (id !== null) {
     $.ajax({
       type: 'POST',
-      url: 'http://localhost:5000/get_all_applications_by_id',
+      url: window.location.origin+':5000/get_all_applications_by_id',
       headers: {
         'Content-Type': 'application/json'
       },

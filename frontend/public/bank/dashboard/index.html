@@ -271,15 +271,14 @@
 <script src="/javascripts/jquery-3.2.1.min.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-  $.get('http://localhost:5000/status', function(data) {
+  $.get(window.location.origin+':5000/status', function(data) {
     console.log(data);
     $('#total_applications').text(data.total_applications);
     $('#approved_applications').text(data.approved_applications);
     $('#pending_applications').text(data.pending_applications);
   });
 
-  $.get('http://localhost:5000/get_past_data', function(data) {
-    console.log(data.bank_loan_revenue);
+  $.get(window.location.origin+':5000/get_past_data', function(data) {
     completed_applications = data.completed_applications;
     loan_promotion_campaign = data.loan_promotion_campaign;
     $('#bank_loan_revenue').text('$'+data.bank_loan_revenue.replace(/(\d)(?=(\d{3})+(,|$))/g, '$1,'));

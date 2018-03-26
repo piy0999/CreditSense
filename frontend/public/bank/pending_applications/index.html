@@ -189,7 +189,7 @@ $(document).ready(function() {
 
   submit_decision = function (id,decision){
     $.ajax({
-      url:"http://localhost:5000/update_application",
+      url:window.location.origin+"/update_application",
       type:"POST",
       data:JSON.stringify({'id':id,'new_status':decision}),
       contentType:"application/json; charset=utf-8",
