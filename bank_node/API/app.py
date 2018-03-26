@@ -7,10 +7,12 @@ from flask_cors import CORS, cross_origin
 app = Flask(__name__)
 CORS(app)
 
+ml_host = ''
 def connect():
     with open('credentials.json') as json_data:
         credentials = json.load(json_data)
         json_data.close()
+    ml_host = credentials["ml_host"]
     rpcuser = credentials["rpcuser"]
     rpcpasswd = credentials["rpcpasswd"]
     rpchost = credentials["rpchost"]
@@ -161,7 +163,7 @@ def add_application():
             application[field] = data[field]
         application['id'] = hash(data['id'])
         application['status'] = 'pending'
-        r = requests.post('http://'+credentials["ml"]+':5000/add_scored_application', json=application)
+        r = requests.post('http://'+ml_host+':5000/add_scored_application', json=application)
         if (r.status_code == 200):
             return jsonify({"status":"success"})
         else:
