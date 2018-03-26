@@ -28,6 +28,7 @@ networkport=`sudo grep default-network-port ~/.multichain/chain1/params.dat | gr
 password=`sudo grep rpcpassword  ~/.multichain/chain1/multichain.conf | cut -d'=' -f2`
 cat >~/CreditSense/bank_node/API/credentials.json <<EOF
     {
+      "ml": "${$1%%:*}"
       "rpcuser": "multichainrpc",
       "rpcpasswd": "$password",
       "rpchost": "localhost",

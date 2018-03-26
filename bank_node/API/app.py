@@ -161,7 +161,7 @@ def add_application():
             application[field] = data[field]
         application['id'] = hash(data['id'])
         application['status'] = 'pending'
-        r = requests.post('http://20.184.15.162:5000/add_scored_application', json=application)
+        r = requests.post('http://'+credentials["rpchost"]+':5000/add_scored_application', json=application)
         if (r.status_code == 200):
             return jsonify({"status":"success"})
         else:
