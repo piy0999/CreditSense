@@ -67,21 +67,21 @@ In the Azure Portal allow go to the deployed virtual machine and ssh into the ma
 
 3. Click on the networking tab -> Add inbound port rule. Inside the inbound port rule dialog type in port_ranges 80 (This allows the Frontend to run)
 
-3. Create another port rule by clicking Add inbound port rule and inside the inbound port rule dialog type in port_ranges <b> Blockchain Port </b> found during the process of creating Master ML Node (This allows the connection with blockchain)
+4. Create another port rule by clicking Add inbound port rule and inside the inbound port rule dialog type in port_ranges <b> Blockchain Port </b> found during the process of creating Master ML Node (This allows the connection with blockchain)
 
-3. To join existing network, get IP address (IP address is the IP address of the Virtual Machine running the Master-ML Node) and port (Port is the <b> Blockchain Port </b> found during the process of creating Master ML Node) , run the following command by replacing the IP and PORT as specified above. `curl -s https://raw.githubusercontent.com/piy0999/CreditSense/master/bank_node/setup_node.sh | bash /dev/stdin IP:PORT`
+5. To join existing network, get IP address (IP address is the IP address of the Virtual Machine running the Master-ML Node) and port (Port is the <b> Blockchain Port </b> found during the process of creating Master ML Node) , run the following command by replacing the IP and PORT as specified above. `curl -s https://raw.githubusercontent.com/piy0999/CreditSense/master/bank_node/setup_node.sh | bash /dev/stdin IP:PORT`
 
-3. Enter OK whenever prompted by Ubuntu and the installation using shell script should begin which takes around 4 minutes.
+6. Enter OK whenever prompted by Ubuntu and the installation using shell script should begin which takes around 4 minutes.
 
-4. After finishing the setup you should see the message `frontend@0.0.0 start`. 
+7. After finishing the setup you should see the message `frontend@0.0.0 start`. 
 
-5. Scroll up inside the terminal until you see the message `9. Starting flask server...` and right above this message the node address is found in the message `Get 60% consensus from the network to grant admin permissions to your address 1BBpVCYkmwWEEGz3MfyAT5G18Fy3ByC7JD2uNd`. Save this address.  
+8. Scroll up inside the terminal until you see the message `9. Starting flask server...` and right above this message the node address is found in the message `Get 60% consensus from the network to grant admin permissions to your address 1BBpVCYkmwWEEGz3MfyAT5G18Fy3ByC7JD2uNd`. Save this address.  
 
 <p align="center">
   <img src="/images/node.png" width="800"/>
 </p>
 
-6. Now permission is needed to join the network from the master Machine Learning node. Please follow the instructions for granting the permission to the node found below. 
+9. Now permission is needed to join the network from the master Machine Learning node. Please follow the instructions for granting the permission to the node found below. 
 
 ###### Grant Permissions to bank node
 1. Inside the Master-ML node type `multichain-cli chain1` and then type `getaddresses`. 
@@ -98,19 +98,19 @@ Let's Submit an application
   <img src="/images/user-application.png" width="800"/>
 </p>
 
-3. After this type `IP/bank/dashboard/` which now shows the number of pending applications, approved applications and total number of applications being queried live from the blockchain. 
+2. After this type `IP/bank/dashboard/` which now shows the number of pending applications, approved applications and total number of applications being queried live from the blockchain. 
 
 <p align="center">
   <img src="/images/bank-dashboard.png" width="800"/>
 </p>
 
-4. Now a bank can <b> Approve or Disapprove </b> the loan by clicking on Pending Applications tab and then selecting approve or disapprove from the list of applicants shown with their crypted IDs and credit scores. 
+3. Now a bank can <b> Approve or Disapprove </b> the loan by clicking on Pending Applications tab and then selecting approve or disapprove from the list of applicants shown with their crypted IDs and credit scores. 
 
 <p align="center">
   <img src="/images/bank-approve.png" width="800"/>
 </p>
 
-5. To generate the credit report of an applicant click on the Applicant data tab and enter the HKID (one of those which have been submitted using the apply_loan form above). This ID should be found from the chrome javascript console where the first parameter in the json object printed on the console is id (as random id's are being generated for testing purposes, it is possible to add your custom ID and data still). Use this ID (you can generate as many ID's and applications as possible) and enter on the Applicant data form which would result in returning of the credit score along with applicant's past applications history. 
+4. To generate the credit report of an applicant click on the Applicant data tab and enter the HKID (one of those which have been submitted using the apply_loan form above). This ID should be found from the chrome javascript console where the first parameter in the json object printed on the console is id (as random id's are being generated for testing purposes, it is possible to add your custom ID and data still). Use this ID (you can generate as many ID's and applications as possible) and enter on the Applicant data form which would result in returning of the credit score along with applicant's past applications history. 
 To find the ID please refer to the screenshot:
 
 <p align="center">
