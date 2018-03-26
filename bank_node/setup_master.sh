@@ -44,7 +44,7 @@ sudo ufw allow 5000
 sudo ufw allow $networkport
 sudo ufw --force enable
 nodeaddress=`multichain-cli chain1 getinfo | grep "nodeaddress" | cut -d '"' -f4`
-multichain-cli chain1 create stream strm1
+multichain-cli chain1 create stream strm1 true
 echo "Connect to $nodeaddress from other nodes"
 echo '9. Starting flask server...'
 cd ~/CreditSense/bank_node/API
