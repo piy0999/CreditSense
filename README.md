@@ -50,6 +50,10 @@ The solution has 4 layers which includes:
 
 8. Create another port rule by clicking Add inbound port rule and inside the inbound port rule dialog type in port_ranges <b> Blockchain Port </b> (This allows the connection with blockchain). The Blockchain Port can be found inside the terminal in the message `Connect to chain1@10.0.0.4:2761 from other nodes` returned just before the message `9. Starting flask server...`. In this case the Blockchain Port is 2761. 
 
+<p align="center">
+  <img src="/images/ML-Final.png" width="800"/>
+</p>
+
 9. Now Setup another node inside the blockchain for further process. Remember to store the <b> chain address </b> with you for further processing which can be found before the `Connect to chain1@10.0.0.4:2761 from other nodes` message. In this case, it is `90c123532b29b4b07b3c072cab67502eabc64531804cb1aa3c741f03bd628dc3`. Please refer to the image for a better understanding. 
 
 10. Use Ctrl-C and after <b> Granting the permission to node </b> press Ctrl-C again. 
@@ -73,6 +77,10 @@ In the Azure Portal allow go to the deployed virtual machine and ssh into the ma
 
 5. Scroll up inside the terminal until you see the message `9. Starting flask server...` and right above this message the node address is found in the message `Get 60% consensus from the network to grant admin permissions to your address 1BBpVCYkmwWEEGz3MfyAT5G18Fy3ByC7JD2uNd`. Save this address.  
 
+<p align="center">
+  <img src="/images/node.png" width="800"/>
+</p>
+
 6. Now permission is needed to join the network from the master Machine Learning node. Please follow the instructions for granting the permission to the node found below. 
 
 ###### Grant Permissions to bank node
@@ -82,11 +90,46 @@ In the Azure Portal allow go to the deployed virtual machine and ssh into the ma
 
 ###### Run the frontend from the bank node
 Please do this process after successfully setting up the Master-ML node and the bank node. 
-1. Go to Google Chrome web browser and type `IP/bank/` in the browser where IP = the node's virtual machine's IP. After clicking login (No need for username and password for now) you can go to the dashboard. 
-2. Type `IP/user/apply_loan/` this is a sample application form which would be inside the bank's online banking portal. Just click on submit which generates a set of data and then sends it to the machine learning node. A dialog box saying `The Application has been received` appears on successful submission. 
+Let's Submit an application
+
+1. Type `IP/user/apply_loan/` this is a sample application form which would be inside the bank's online banking portal. Just click on submit which generates a set of data and then sends it to the machine learning node. A dialog box saying `The Application has been received` appears on successful submission. 
+
+<p align="center">
+  <img src="/images/user-application.png" width="800"/>
+</p>
+
 3. After this type `IP/bank/dashboard/` which now shows the number of pending applications, approved applications and total number of applications being queried live from the blockchain. 
+
+<p align="center">
+  <img src="/images/bank-dashboard.png" width="800"/>
+</p>
+
 4. Now a bank can <b> Approve or Disapprove </b> the loan by clicking on Pending Applications tab and then selecting approve or disapprove from the list of applicants shown with their crypted IDs and credit scores. 
+
+<p align="center">
+  <img src="/images/bank-approve.png" width="800"/>
+</p>
+
 5. To generate the credit report of an applicant click on the Applicant data tab and enter the HKID (one of those which have been submitted using the apply_loan form above). This ID should be found from the chrome javascript console where the first parameter in the json object printed on the console is id (as random id's are being generated for testing purposes, it is possible to add your custom ID and data still). Use this ID (you can generate as many ID's and applications as possible) and enter on the Applicant data form which would result in returning of the credit score along with applicant's past applications history. 
+To find the ID please refer to the screenshot:
+
+<p align="center">
+  <img src="/images/User-findID.png" width="800"/>
+</p>
+
+Enter the ID here:
+
+<p align="center">
+  <img src="/images/bank-report.png" width="800"/>
+</p>
+
+The final credit score is shown as:
+
+<p align="center">
+  <img src="/images/bank-creditscore.png" width="800"/>
+</p>
+
+# System Details
 
 <b>The Machine Learning Node:</b> This node is the brain of the whole application as such. The process starts off with the deep learning model which consists of 2 layer neural network with 35 hidden neurons. The model removes the need to analyse each of the 73 factors and instead gives us the set of optimal features required to carry out the analysis with an improving accuracy of 92.71% (Currently migrating to RNN machine learning model with LSTM implementation). Upon finding the optimal features, the logistic regression model then accesses the data of those optimal features for the specific applicant on the ledger and then predicts the probability of the specific applicant to default on his loan. This analytics is further powered by Microsoft Azure Data Lake Analytics and Microsoft Power BI to create the necessary graphs and carry out the required analysis.
 
