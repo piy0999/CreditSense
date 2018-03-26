@@ -2,7 +2,7 @@
 
  <img src="/images/cs.png" width="150" align= "center"/>
 
-A decentralised credit scoring service based on blockchain which employes deep learning to calculate an intelligent credit score based on the credit history, deliquencies and 73 other parameters which are usually accounted while calculating a comprehensive credit score.
+A decentralised credit scoring service based on blockchain which employs deep learning to calculate an intelligent credit score based on the credit history, deliquencies and 73 other parameters which are usually accounted while calculating a comprehensive credit score.
 
 A flow chart describing the overall application is as follows:
 
@@ -42,20 +42,20 @@ The solution has 4 layers which includes:
 
 # Why are we Different?
 
-Secure Anonymous Data Sharing - Applicant data is shared by all the banks on a private blockchain ledger which maintains the security of the data due to a private network formation but at the same time does not contain any personal identifiers with the HKID number being hashed and stored on the block securely. Enabling faster, secure and anonymized data sharing.
+<b> Secure Anonymous Data Sharing - </b> Applicant data is shared by all the banks on a private blockchain ledger which maintains the security of the data due to a private network formation but at the same time does not contain any personal identifiers with the HKID number being hashed and stored on the block securely. Enabling faster, secure and anonymized data sharing.
 
-Decentralization removes the need for third party agencies like TransUnion - As credit scoring can be done directly through the machine learning model with the training data from the banks as well as the current data provided by user on the decentralized system, there is no need for a centralized agency to actually maintain that data which saves the time and money for the banks to actually process the whole loan application.
+<b> Decentralization removes the need for third party agencies like TransUnion - </b> As credit scoring can be done directly through the machine learning model with the training data from the banks as well as the current data provided by user on the decentralized system, there is no need for a centralized agency to actually maintain that data which saves the time and money for the banks to actually process the whole loan application.
 
-No hard coded credit score formula - As we are implementing reinforced learning on our machine learning model we actually take into consideration in addition to our existing machine learning model parameters such as the employment history of the individual, the age but also when and in what time was the loan repaid and whether the applicant was able to repay or not. Through reinforced learning the calculation formula keeps getting better and this eliminates the need of a static mathematical formula.
+<b> No hard coded credit score formula - </b> As we are implementing reinforced learning on our machine learning model we actually take into consideration in addition to our existing machine learning model parameters such as the employment history of the individual, the age but also when and in what time was the loan repaid and whether the applicant was able to repay or not. Through reinforced learning the calculation formula keeps getting better and this eliminates the need of a static mathematical formula.
 
 # Our Target Customers
 
 We have three main target customers:
 
-Banks → Banks can directly receive user data for calculating credit score on spot from the user without the need of going through the process of TransUnion HK which reduces the time and trust that banks need to have on a third party credit score service provider.
+<b> Banks → </b>Banks can directly receive user data for calculating credit score on spot from the user without the need of going through the process of TransUnion HK which reduces the time and trust that banks need to have on a third party credit score service provider.
 
-Loan Applicants → Applicants can directly submit the requisite data required for credit score processing using the frontend integrated with the bank’s cyberbanking services with complete anonymity to the decentralized blockchain architecture.
+<b> Loan Applicants → </b> Applicants can directly submit the requisite data required for credit score processing using the frontend integrated with the bank’s cyberbanking services with complete anonymity to the decentralized blockchain architecture.
 
-Government (i.e.: Financial regulators) → With the ease in acquiring a standardized credit score, governments could benefit from the increasingly accurate data by leveraging its ability to distinguish the financial capabilities of its citizens. Consequently, via data analyses, the government could derive or be one of the indicators to determine the economic stability of the region as a whole. This could be achieved by implementing a government node on the blockchain and having a specific machine learning model for their analysis in the form of anonymized data.
+<b> Government (i.e.: Financial regulators) → </b>  With the ease in acquiring a standardized credit score, governments could benefit from the increasingly accurate data by leveraging its ability to distinguish the financial capabilities of its citizens. Consequently, via data analyses, the government could derive or be one of the indicators to determine the economic stability of the region as a whole. This could be achieved by implementing a government node on the blockchain and having a specific machine learning model for their analysis in the form of anonymized data.
 
-Credit Sense makes Sense!
+<b> Credit Sense makes Sense! </b>
