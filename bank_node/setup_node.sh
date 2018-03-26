@@ -48,8 +48,8 @@ echo '9. Starting flask server...'
 cd ~/CreditSense/bank_node/API
 python3 app.py
 echo '10. Starting frontend...'
-sudo apt-get install nodejs
-sudo apt-get install npm
+sudo apt-get install -y nodejs
+sudo apt-get install -y npm
 cd ~/CreditSense/frontend
 npm install
 sudo npm start
