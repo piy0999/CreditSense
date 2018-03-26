@@ -21,7 +21,6 @@ sudo mv multichaind multichain-cli multichain-util /usr/local/bin
 cd ~
 echo '6. Connecting to multichain chain...'
 multichaind chain1@$1 -daemon
-multichaind chain1 -daemon
 echo '7. Setting up local credentials for multichain...'
 port=`sudo grep default-rpc-port ~/.multichain/chain1/params.dat | grep -oP '[0-9]{4}'`
 networkport=`sudo grep default-network-port ~/.multichain/chain1/params.dat | grep -oP '[0-9]{4}'`
@@ -29,7 +28,7 @@ password=`sudo grep rpcpassword  ~/.multichain/chain1/multichain.conf | cut -d'=
 ml_host=$1
 cat >~/CreditSense/bank_node/API/credentials.json <<EOF
     {
-      "ml_host": "${ml_host%%:*}"
+      "ml_host": "${ml_host%%:*}",
       "rpcuser": "multichainrpc",
       "rpcpasswd": "$password",
       "rpchost": "localhost",
