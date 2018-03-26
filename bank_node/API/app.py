@@ -12,6 +12,7 @@ def connect():
     with open('credentials.json') as json_data:
         credentials = json.load(json_data)
         json_data.close()
+    global ml_host
     ml_host = credentials["ml_host"]
     rpcuser = credentials["rpcuser"]
     rpcpasswd = credentials["rpcpasswd"]
