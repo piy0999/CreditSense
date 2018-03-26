@@ -46,7 +46,7 @@ address=`multichain-cli chain1 getaddresses | grep '"' | cut -d '"' -f2`
 echo "Get 60% consensus from the network to grant admin permissions to your address $address"
 echo '9. Starting flask server...'
 cd ~/CreditSense/bank_node/API
-python3 app.py
+python3 app.py &
 echo '10. Starting frontend...'
 sudo apt-get install -y nodejs
 sudo apt-get install -y npm
