@@ -46,6 +46,7 @@ sudo ufw --force enable
 nodeaddress=`multichain-cli chain1 getinfo | grep "nodeaddress" | cut -d '"' -f4`
 multichain-cli chain1 create stream strm1 true
 echo "Connect to $nodeaddress from other nodes"
+sudo sed -i 's/Savoir.Savoir/Savoir/g' /usr/local/lib/python2.7/dist-packages/Savoir/__init__.py
 echo '9. Starting flask server...'
 cd ~/CreditSense/bank_node/API
 python mlapi.py &
