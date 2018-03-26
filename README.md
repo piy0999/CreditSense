@@ -44,19 +44,19 @@ The solution has 4 layers which includes:
 
 4. After Successful installation the flask server initiates with message `Running on http://0.0.0.0:5000/`
 
-6. In the Azure Portal allow the ports to accept incoming connection. Go to the Azure portal Virtual Machine Dashboard
+5. In the Azure Portal allow the ports to accept incoming connection. Go to the Azure portal Virtual Machine Dashboard
 
-7. Click on the networking tab -> Add inbound port rule. Inside the inbound port rule dialog type in port_ranges 5000 (This allows the API to listen to requests)
+6. Click on the networking tab -> Add inbound port rule. Inside the inbound port rule dialog type in port_ranges 5000 (This allows the API to listen to requests)
 
-8. Create another port rule by clicking Add inbound port rule and inside the inbound port rule dialog type in port_ranges <b> Blockchain Port </b> (This allows the connection with blockchain). The Blockchain Port can be found inside the terminal in the message `Connect to chain1@10.0.0.4:2761 from other nodes` returned just before the message `9. Starting flask server...`. In this case the Blockchain Port is 2761. 
+7. Create another port rule by clicking Add inbound port rule and inside the inbound port rule dialog type in port_ranges <b> Blockchain Port </b> (This allows the connection with blockchain). The Blockchain Port can be found inside the terminal in the message `Connect to chain1@10.0.0.4:2761 from other nodes` returned just before the message `9. Starting flask server...`. In this case the Blockchain Port is 2761. 
 
 <p align="center">
   <img src="/images/ML-Final.png" width="800"/>
 </p>
 
-9. Now Setup another node inside the blockchain for further process. Remember to store the <b> chain address </b> with you for further processing which can be found before the `Connect to chain1@10.0.0.4:2761 from other nodes` message. In this case, it is `90c123532b29b4b07b3c072cab67502eabc64531804cb1aa3c741f03bd628dc3`. Please refer to the image for a better understanding. 
+8. Now Setup another node inside the blockchain for further process. Remember to store the <b> chain address </b> with you for further processing which can be found before the `Connect to chain1@10.0.0.4:2761 from other nodes` message. In this case, it is `90c123532b29b4b07b3c072cab67502eabc64531804cb1aa3c741f03bd628dc3`. Please refer to the image for a better understanding. 
 
-10. Use Ctrl-C and after <b> Granting the permission to node </b> press Ctrl-C again. 
+9. Use Ctrl-C and after <b> Granting the permission to node </b> press Ctrl-C again. 
 ###### Create the Bank Node
 Please setup a new Virtual Machine on Azure before starting the further process using Virtual Machine Setup guide above.
 In the Azure Portal allow go to the deployed virtual machine and ssh into the machine by clicking on connect and running the ssh command `ssh username@IP`. Enter the VM password during the setup and after successful login you should see `Welcome to Ubuntu 17.10 (GNU/Linux 4.13.0-37-generic x86_64)`
