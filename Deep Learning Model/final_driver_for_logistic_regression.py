@@ -21,9 +21,8 @@ import pickle
 import matplotlib.pyplot as plt
 
 
-loaded_model = pickle.load(open('finalized_model.sav', 'rb'))
-
-loaded_mapper = pickle.load(open('mapper.pkl', 'rb'))
+loaded_model = pickle.load(open('finalized_model.sav', 'rb')) #loading the saved logistic regression model
+loaded_mapper = pickle.load(open('mapper.pkl', 'rb')) #loading the saved mapper pickle file
 
 from sklearn_pandas import DataFrameMapper
 
@@ -70,4 +69,4 @@ score = score * 10
 score = 10 - score
 score = str(score)
 
-print("Score: ", score)
+print("Score: ",score)
