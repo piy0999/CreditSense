@@ -22,7 +22,7 @@ A flow chart describing the overall application is as follows:
 
 # System Technicalities
 
-We have a deployable prototype of our solution already running. We also have a made short walkthrough video of the system which can be seen on: https://vimeo.com/253112175
+We have a deployable prototype of our solution already running. We also have a made short walkthrough video of the system which can be seen on: https://youtu.be/ov2LHC7JzPA
 
 The solution has 4 layers which includes:
 
