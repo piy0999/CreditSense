@@ -10,7 +10,7 @@ A flow chart describing the overall application is as follows:
   <img src="/images/model.png" width="800"/>
 </p>
 
-1. Each bank has a loan application portal through which loan applicants generally input their sensitive data and upload important documents such as income-tax returns. This data is then converted into a JSON file to be stored on the blockchain ledger.
+1. Each bank has a loan application portal through which loan applicants generally input their sensitive data and upload important documents such as income-tax returns. This data is then inserted into the Multichain datastream from which the Machine Learning Node can get access to the data.
 
 2. The only entity that has access to this ledger during the whole process is the deep learning model. This model removes the need of feature engineering and helps us find optimal features from more than 73 features which go into consideration such as annual income, number of delinquencies etc. Upon careful feature engineering, these features to a logistic regression model which then computes the probability with which the specific applicant will default on the loan.
 
