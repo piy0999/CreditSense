@@ -211,7 +211,6 @@ def update_application():
 
             hexval = finaldata.encode('utf-8')
             curid = datetime.datetime.now()
-            multichain.subscribe("strm1")
             multichain.publish("strm1", str(curid), hexval.hex())
 
             return jsonify({"status":"success"})
