@@ -85,7 +85,7 @@ In the Azure Portal allow go to the deployed virtual machine and ssh into the ma
 
 ###### Grant Permissions to bank node
 1. Inside the Master-ML node type `multichain-cli chain1` and then type `getaddresses`. 
-2. Copy the address returned without the double quotes and then type `grant from address(found using above getaddresses command) nodeaddress (sent by the node) admin`. 
+2. Copy the address returned without the double quotes and then type `grantfrom address(found using above getaddresses command) nodeaddress (sent by the node) admin`. 
 3. If a transaction id is returned then there is no error and the node has been made an admin. 
 
 ###### Run the frontend from the bank node
