@@ -37,7 +37,7 @@ def all_latest_applications():
     for application in data:
         application = json.loads(bytearray.fromhex(application['data']).decode())
         print(application)
-        if application['nodeid'] == sys.agrv[1]:
+        if application['nodeid'] == sys.argv[1]:
             applications[application['id']] = application
     return applications
 
@@ -67,7 +67,7 @@ def get_all_applications_by_id(given_id):
     applications = []
     for application in data:
         application = json.loads(bytearray.fromhex(application['data']).decode())
-        if application['id'] == hashed_id and application['nodeid'] == sys.agrv[1]:
+        if application['id'] == hashed_id and application['nodeid'] == sys.argv[1]:
             applications.append(application)
     return applications
     if len(application) == 0:
@@ -166,7 +166,7 @@ def add_application():
             application[field] = data[field]
         application['id'] = hash(data['id'])
         application['status'] = 'pending'
-        print(sys.agrv[1])
+        print(sys.argv[1])
         application['nodeid'] = sys.argv[1]
         print(ml_host)
         r = requests.post('http://'+ml_host+':5000/add_scored_application', json=application)
