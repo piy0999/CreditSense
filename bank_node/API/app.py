@@ -168,6 +168,7 @@ def add_application():
         application['status'] = 'pending'
         print(sys.argv[1])
         application['nodeid'] = sys.argv[1]
+        print(application)
         print(ml_host)
         r = requests.post('http://'+ml_host+':5000/add_scored_application', json=application)
         if (r.status_code == 200):
