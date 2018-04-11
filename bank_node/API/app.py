@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from Savoir import Savoir
-import requests, json, time, datetime, hashlib
+import requests, json, time, datetime, hashlib, sys
 from random import randint
 from flask_cors import CORS, cross_origin
 
@@ -36,7 +36,9 @@ def all_latest_applications():
     applications = {}
     for application in data:
         application = json.loads(bytearray.fromhex(application['data']).decode())
-        applications[application['id']] = application
+        print(application)
+        if application['nodeid'] == sys.agrv[1]:
+            applications[application['id']] = application
     return applications
 
 def all_applications():
@@ -65,7 +67,7 @@ def get_all_applications_by_id(given_id):
     applications = []
     for application in data:
         application = json.loads(bytearray.fromhex(application['data']).decode())
-        if application['id'] == hashed_id:
+        if application['id'] == hashed_id and application['nodeid'] == sys.agrv[1]:
             applications.append(application)
     return applications
     if len(application) == 0:
@@ -164,6 +166,7 @@ def add_application():
             application[field] = data[field]
         application['id'] = hash(data['id'])
         application['status'] = 'pending'
+        application['nodeid'] = sys.argv[1]
         print(ml_host)
         r = requests.post('http://'+ml_host+':5000/add_scored_application', json=application)
         if (r.status_code == 200):
