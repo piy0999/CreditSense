@@ -166,6 +166,7 @@ def add_application():
             application[field] = data[field]
         application['id'] = hash(data['id'])
         application['status'] = 'pending'
+        print(sys.agrv[1])
         application['nodeid'] = sys.argv[1]
         print(ml_host)
         r = requests.post('http://'+ml_host+':5000/add_scored_application', json=application)
