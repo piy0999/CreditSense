@@ -52,4 +52,4 @@ sudo apt-get install -y nodejs
 sudo apt-get install -y npm
 cd ~/CreditSense/frontend
 npm install
-sudo npm start
+sudo npm start &
