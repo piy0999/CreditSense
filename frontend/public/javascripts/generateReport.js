@@ -27,7 +27,7 @@ submit_report_request = function() {
   if (id !== null) {
     $.ajax({
       type: 'POST',
-      url: window.location.origin+':5000/get_all_applications_by_id',
+      url: window.location.origin + ':5000/get_all_applications_by_id',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -36,7 +36,7 @@ submit_report_request = function() {
       success: function(applicant) {
         $('#form').hide();
         console.log(applicant[0].id);
-        $('#score').html(applicant[0].score);
+        $('#score').html(applicant[applicant.length - 1].score);
         $('#score').css('text-align', 'center');
         $('#score').css('font-size', '60px');
         $('#score').css('font-weight', 'bold');
