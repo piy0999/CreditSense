@@ -99,7 +99,7 @@ window.onload = function() {
   var x = document.getElementById('submit');
   x.onclick = function() {
     var xhttp = new XMLHttpRequest();
-    xhttp.open('POST', window.location.origin+':5000/add_application', true);
+    xhttp.open('POST', window.location.origin + ':5000/add_application', true);
     xhttp.setRequestHeader('Content-type', 'application/json');
     xhttp.responseType = 'json';
     for (var i = 0; i < list.length; i++) {
@@ -108,7 +108,8 @@ window.onload = function() {
     }
 
     var data = {};
-    data['id'] = getRandomInt(1, 10000).toString();
+    //data['id'] = getRandomInt(1, 10000).toString();
+    data['id'] = document.getElementById('id').value;
     for (var i = 1; i < list.length; i++) {
       var val = document.getElementById(list[i]).value;
       data[list[i]] = val;
