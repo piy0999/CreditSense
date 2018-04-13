@@ -68,9 +68,8 @@ def get_all_applications_by_id(given_id):
     applications = []
     for application in data:
         application = json.loads(bytearray.fromhex(application['data']).decode())
-        if 'nodeid' in application:
-            if application['id'] == hashed_id and application['nodeid'] == sys.argv[1]:
-                applications.append(application)
+        if application['id'] == hashed_id:
+            applications.append(application)
     return applications
     if len(application) == 0:
         return None
