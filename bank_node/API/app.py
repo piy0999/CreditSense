@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from Savoir import Savoir
-import requests, json, time, datetime, hashlib
+import requests, json, time, datetime, hashlib, sys
 from random import randint
 from flask_cors import CORS, cross_origin
 
@@ -12,6 +12,7 @@ def connect():
     with open('credentials.json') as json_data:
         credentials = json.load(json_data)
         json_data.close()
+    global ml_host
     ml_host = credentials["ml_host"]
     rpcuser = credentials["rpcuser"]
     rpcpasswd = credentials["rpcpasswd"]
@@ -35,7 +36,10 @@ def all_latest_applications():
     applications = {}
     for application in data:
         application = json.loads(bytearray.fromhex(application['data']).decode())
-        applications[application['id']] = application
+        print(application)
+        if 'nodeid' in application:
+            if application['nodeid'] == sys.argv[1]:
+                applications[application['id']] = application
     return applications
 
 def all_applications():
@@ -163,6 +167,10 @@ def add_application():
             application[field] = data[field]
         application['id'] = hash(data['id'])
         application['status'] = 'pending'
+        print(sys.argv[1])
+        application['nodeid'] = sys.argv[1]
+        print(application)
+        print(ml_host)
         r = requests.post('http://'+ml_host+':5000/add_scored_application', json=application)
         if (r.status_code == 200):
             return jsonify({"status":"success"})
