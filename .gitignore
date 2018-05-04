@@ -5,3 +5,7 @@
 node_modules
 ml_helper.pyc
 __pycache__
+
+nbproject
+npm-debug.log
+.sass-cache

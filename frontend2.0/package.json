@@ -1,0 +1,28 @@
+{
+  "name": "gentelella",
+  "version": "1.4.0",
+  "description": "CreditSense",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+http://github.com/piy0999/CreditSense.git"
+  },
+  "keywords": [
+  ],
+  "author": "",
+  "contributors": [
+  ],
+  "license": "MIT",
+  "main": "build/js/custom.min.js",
+  "devDependencies": {
+    "browser-sync": "^2.12.10",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-ruby-sass": "^2.0.6",
+    "gulp-uglify": "^1.5.3"
+  }
+}
