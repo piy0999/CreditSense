@@ -9,11 +9,9 @@
     "type": "git",
     "url": "git+http://github.com/piy0999/CreditSense.git"
   },
-  "keywords": [
-  ],
+  "keywords": [],
   "author": "",
-  "contributors": [
-  ],
+  "contributors": [],
   "license": "MIT",
   "main": "build/js/custom.min.js",
   "devDependencies": {
