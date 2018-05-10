@@ -44,6 +44,7 @@ gulp.task('browser-sync', function() {
         extensions: ['html']
       }
     },
+    port: 80,
     notify: false,
     startPath: './bank/dashboard'
   });
