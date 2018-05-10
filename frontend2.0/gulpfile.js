@@ -3,7 +3,7 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     rename = require('gulp-rename'),
     sass = require('gulp-ruby-sass'),
-    autoprefixer = require('gulp-autoprefixer'),
+    autoprefixer = require('gulp-autoprefixer');
     browserSync = require('browser-sync').create();
 
 var DEST = 'build/';
@@ -41,9 +41,13 @@ gulp.task('sass-minify', function() {
 gulp.task('browser-sync', function() {
     browserSync.init({
         server: {
-            baseDir: './'
+            baseDir: './',
+            serveStaticOptions: {
+              extensions: ['html']
+            }
         },
-        startPath: './production/index.html'
+        notify: false,
+        startPath: './bank/loan_application'
     });
 });
 
@@ -58,3 +62,4 @@ gulp.task('watch', function() {
 
 // Default Task
 gulp.task('default', ['browser-sync', 'watch']);
+//gulp.task('default', ['watch']);
