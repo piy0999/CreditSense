@@ -309,7 +309,7 @@
                     </ul>
                     <div class="clearfix"></div>
                   </div>
-                  <div class="x_content">
+                  <div class="x_content" id="form">
 
 
                     <!-- Smart Wizard -->
@@ -356,7 +356,7 @@
                           <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Use Past Information</label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input type="checkbox" class="js-switch" checked />
+                              <input type="checkbox" class="js-switch" unchecked />
                             </div>
                           </div>
 
@@ -367,7 +367,7 @@
                         <form class="form-horizontal form-label-left">
 
                           <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="salary">Annual Salary<span class="required">*</span>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="salary">Monthly Salary (HK$)<span class="required">*</span>
                             </label>
                             <div class="col-md-2 col-sm-2 col-xs-12">
                               <input type="number" id="salary" required="required" class="form-control col-md-7 col-xs-12">
@@ -375,7 +375,7 @@
                           </div>
 
                           <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="emp_length_num">Employment Length<span class="required">*</span>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="emp_length_num">Employment Length (Years)<span class="required">*</span>
                             </label>
                             <div class="col-md-2 col-sm-2 col-xs-12">
                               <input type="number" id="emp_length_num" required="required" class="form-control col-md-7 col-xs-12">
@@ -386,21 +386,28 @@
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="home_ownership">Home Status<span class="required">*</span>
                             </label>
                             <div class="col-md-2 col-sm-2 col-xs-12">
-                              <input type="number" id="home_ownership" required="required" class="form-control col-md-7 col-xs-12">
+                              <input type="text" id="home_ownership" required="required" class="form-control col-md-7 col-xs-12">
                             </div>
                           </div>
 
                           <div class="form-group">
                               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="purpose">Purpose of Loan<span class="required">*</span></label>
                               <div class="col-md-2 col-sm-2 col-xs-12">
-                                  <input type="number" id="purpose" required="required" class="form-control col-md-7 col-xs-12">
+                                  <input type="text" id="purpose" required="required" class="form-control col-md-7 col-xs-12">
                               </div>
                           </div>
 
                           <div class="form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="purpose">Required Loan<span class="required">*</span></label>
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="required_loan">Required Loan (HK$)<span class="required">*</span></label>
                               <div class="col-md-2 col-sm-2 col-xs-12">
-                                  <input type="number" id="purpose" required="required" class="form-control col-md-7 col-xs-12">
+                                  <input type="number" id="required_loan" required="required" class="form-control col-md-7 col-xs-12">
+                              </div>
+                          </div>
+
+                          <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="loan_duration">Loan Duration (Months)<span class="required">*</span></label>
+                              <div class="col-md-2 col-sm-2 col-xs-12">
+                                  <input type="number" id="loan_duration" required="required" class="form-control col-md-7 col-xs-12">
                               </div>
                           </div>
 
@@ -436,7 +443,7 @@
                           <div class="form-group">
                               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="grade">Assigned Grade<span class="required">*</span></label>
                               <div class="col-md-2 col-sm-2 col-xs-12">
-                                  <input type="number" id="grade" required="required" class="form-control col-md-7 col-xs-12">
+                                  <input type="text" id="grade" required="required" class="form-control col-md-7 col-xs-12">
                               </div>
                           </div>
                           <div class="form-group">
@@ -470,7 +477,7 @@
                               </div>
                           </div>
                           <div class="form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sub_grade_num">Assigned Sub Grade<span class="required">*</span></label>
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sub_grade_num">Assigned Sub Grade Number<span class="required">*</span></label>
                               <div class="col-md-2 col-sm-2 col-xs-12">
                                   <input type="number" id="sub_grade_num" required="required" class="form-control col-md-7 col-xs-12">
                               </div>
@@ -498,6 +505,76 @@
                       </div>
                     </div>
                     <!-- End SmartWizard Content -->
+                  </div>
+                  <div class="x_content" id="success" style="display:none">
+                    <div class="alert alert-success" role="alert">
+                      Application successfully submitted.
+                    </div>
+
+                    <div class="loader"></div>
+                  </div>
+                  <div class="x_content" id="report">
+                    <div class="panel panel-success">
+                      <div class="panel-heading text-center">Credit Report</div>
+                      <div class="panel-body text-center">
+                        <h3>Score: <span class="badge">8.01</span></h3>
+                      </div>
+                    </div>
+
+                    <!-- graph area -->
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <div class="x_panel">
+                        <div class="x_title">
+                          <h2>Credit Score LSTM <small>Trend and Predictions</small></h2>
+                          <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li class="dropdown">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                              <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Settings 1</a>
+                                </li>
+                                <li><a href="#">Settings 2</a>
+                                </li>
+                              </ul>
+                            </li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                          </ul>
+                          <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content2">
+                          <div id="graph_area" style="width:100%; height:300px;"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <div class="x_panel">
+                        <div class="x_title">
+                          <h2>Decision Weights <small>Diversity Parameters</small></h2>
+                          <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li class="dropdown">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                              <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Settings 1</a>
+                                </li>
+                                <li><a href="#">Settings 2</a>
+                                </li>
+                              </ul>
+                            </li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                          </ul>
+                          <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                          <canvas id="pieChart"></canvas>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /graph area -->
                   </div>
                 </div>
               </div>
@@ -536,17 +613,147 @@
     <!-- jquery.inputmask -->
     <script src="../vendors/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
 
+    <!-- Chart.js -->
+    <script src="../vendors/Chart.js/dist/Chart.min.js"></script>
+
+    <!-- morris.js -->
+    <script src="../vendors/raphael/raphael.min.js"></script>
+    <script src="../vendors/morris.js/morris.min.js"></script>
+
   </body>
 </html>
+<style>
+.loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+    margin:auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+</style>
 
 <script>
-function submitApplication(){
+function submitApplication() {
   console.log('Finish button pressed.');
+  $('#form').hide();
+  $('#success').show();
+  setTimeout(function() {
+    $('#report').show();
+    $('#success').hide();
+  }, 2000);
 }
 
 $('#wizard').smartWizard({
-  onFinish: submitApplication  // triggers when Finish button is clicked
+  onFinish: submitApplication // triggers when Finish button is clicked
 });
 
+$(function() {
+  list = [
+    'id',
+    'dti',
+    'inq_last_6mths',
+    'open_acc',
+    'emp_length_num',
+    'revol_util',
+    'grade',
+    'payment_inc_ratio',
+    'purpose',
+    'delinq_2yrs_zero',
+    'pub_rec_zero',
+    'pub_rec',
+    'short_emp',
+    'home_ownership',
+    'sub_grade_num',
+    'last_major_derog_none',
+    'last_delinq_none',
+    'delinq_2yrs'
+  ];
+
+  var obj = {
+    id: 'A111112(4)',
+    member_id: '1296599',
+    loan_amnt: '5000',
+    funded_amnt: '5000',
+    funded_amnt_inv: '4975',
+    term: ' 36 months',
+    int_rate: '10.65',
+    installment: '162.87',
+    grade: 'B',
+    sub_grade: 'B2',
+    emp_title: '',
+    emp_length: '10+ years',
+    home_ownership: 'RENT',
+    annual_inc: '24000',
+    is_inc_v: 'Verified',
+    issue_d: '20111201T000000',
+    loan_status: 'Fully Paid',
+    pymnt_plan: 'n',
+    url: 'https://www.lendingclub.com/browse/loanDetail.action?loan_id=1077501',
+    desc:
+      '  Borrower added on 12/22/11 > I need to upgrade my business technologies.<br>',
+    purpose: '',
+    title: 'Computer',
+    zip_code: '860xx',
+    addr_state: 'AZ',
+    dti: '27.65',
+    delinq_2yrs: '0',
+    earliest_cr_line: '19850101T000000',
+    inq_last_6mths: '1',
+    mths_since_last_delinq: '',
+    mths_since_last_record: '',
+    open_acc: '3',
+    pub_rec: '0',
+    revol_bal: '13648',
+    revol_util: '83.7',
+    total_acc: '9',
+    initial_list_status: 'f',
+    out_prncp: '0',
+    out_prncp_inv: '0',
+    total_pymnt: '5861.07',
+    total_pymnt_inv: '5831.78',
+    total_rec_prncp: '5000',
+    total_rec_int: '861.07',
+    total_rec_late_fee: '0',
+    recoveries: '0',
+    collection_recovery_fee: '0',
+    last_pymnt_d: '20150101T000000',
+    last_pymnt_amnt: '171.62',
+    next_pymnt_d: '',
+    last_credit_pull_d: '20150101T000000',
+    collections_12_mths_ex_med: '0',
+    mths_since_last_major_derog: '',
+    policy_code: '1',
+    not_compliant: '0',
+    status: 'Fully Paid',
+    inactive_loans: '1',
+    bad_loans: '0',
+    emp_length_num: '11',
+    grade_num: '5',
+    sub_grade_num: '0.4',
+    delinq_2yrs_zero: '1',
+    pub_rec_zero: '1',
+    collections_12_mths_zero: '1',
+    short_emp: '0',
+    payment_inc_ratio: '8.1435',
+    final_d: '20141201T000000',
+    last_delinq_none: '1',
+    last_record_none: '1',
+    last_major_derog_none: '1'
+  };
+
+  $.each(list, function(key, requirement) {
+    console.log(obj[requirement]);
+    $('#' + requirement).val(obj[requirement]);
+  });
+  $(function() {
+    $('#report').hide();
+  });
 });
 </script>
