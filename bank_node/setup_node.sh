@@ -33,7 +33,8 @@ cat >~/CreditSense/bank_node/API/credentials.json <<EOF
       "rpcpasswd": "$password",
       "rpchost": "localhost",
       "rpcport": "$port",
-      "chainname": "chain1"
+      "chainname": "chain1",
+      "mlport":"5000"
     }
 EOF
 echo '8. Opening ports....'
