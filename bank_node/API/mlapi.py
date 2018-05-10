@@ -7,6 +7,9 @@ from flask_cors import CORS, cross_origin
 app = Flask(__name__)
 CORS(app)
 
+ml_host = '0.0.0.0'
+ml_port = '5000'
+
 def connect():
     with open('credentials.json') as json_data:
         credentials = json.load(json_data)
@@ -16,6 +19,12 @@ def connect():
     rpchost = credentials["rpchost"]
     rpcport = credentials["rpcport"]
     chainname = credentials["chainname"]
+
+    global ml_host
+    global ml_port
+    ml_host = credentials["mlhost"]
+    ml_port = credentials["mlport"]
+
     return Savoir(rpcuser, rpcpasswd, rpchost, rpcport, chainname)
 
 multichain = connect()
@@ -65,4 +74,4 @@ def get_credit_score():
 		return jsonify(data)
 
 if __name__ == "__main__":
-    app.run(debug=True,host='0.0.0.0', port=5000)
+    app.run(debug=True,host=ml_host, port=int(ml_port))

@@ -8,17 +8,23 @@ app = Flask(__name__)
 CORS(app)
 
 ml_host = ''
+ml_port = '5000'
+
 def connect():
     with open('credentials.json') as json_data:
         credentials = json.load(json_data)
         json_data.close()
-    global ml_host
-    ml_host = credentials["ml_host"]
     rpcuser = credentials["rpcuser"]
     rpcpasswd = credentials["rpcpasswd"]
     rpchost = credentials["rpchost"]
     rpcport = credentials["rpcport"]
     chainname = credentials["chainname"]
+
+    global ml_host
+    global ml_port
+    ml_host = credentials["mlhost"]
+    ml_port = credentials["mlport"]
+
     return Savoir(rpcuser, rpcpasswd, rpchost, rpcport, chainname)
 
 multichain = connect()
@@ -170,8 +176,8 @@ def add_application():
         print(sys.argv[1])
         application['nodeid'] = sys.argv[1]
         print(application)
-        print(ml_host)
-        r = requests.post('http://'+ml_host+':5000/add_scored_application', json=application)
+        print(ml_host + ":" + ml_port)
+        r = requests.post('http://'+ml_host+':'+ml_port+'/add_scored_application', json=application)
         if (r.status_code == 200):
             return jsonify({"status":"success"})
         else:
