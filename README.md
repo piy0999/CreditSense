@@ -2,7 +2,7 @@
 
  <img src="/images/cs.png" width="150" align= "center"/>
 
-A decentralised credit scoring service based on blockchain which employs deep learning to calculate an intelligent credit score based on the credit history, delinquencies and 73 other parameters which are usually accounted while calculating a comprehensive credit score.
+A decentralised credit scoring service based on blockchain which employs deep learning to calculate an intelligent credit score based on the credit history, delinquencies and 73 other parameters which are usually accounted while calculating a comprehensive credit score to promote collaboration among banks for comprehensive collaborated credit reports
 
 A flow chart describing the overall application is as follows:
 
