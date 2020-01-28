@@ -80,7 +80,7 @@ six==1.11.0
 sklearn-pandas==0.0.9
 subprocess32==3.2.7
 tabulate==0.8.2
-tensorflow==1.1.0
+tensorflow==1.15.2
 terminado==0.8.1
 testpath==0.3.1
 Theano==1.0.1
