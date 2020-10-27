@@ -12,7 +12,7 @@ click==6.7
 clint==0.5.1
 configparser==3.5.0
 contextlib2==0.5.5
-cryptography==2.1.4
+cryptography==3.2
 cycler==0.10.0
 decorator==4.2.1
 entrypoints==0.2.3
